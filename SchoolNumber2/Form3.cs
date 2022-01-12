@@ -421,6 +421,7 @@ namespace SchoolNumber2
                              where s.HonorEmploy.Contains(cbHonorEmp.Text)
                              where s.YangSpicialist.Contains(cbYangEmp.Text)
                              where s.PrimaryOrSecondary.Contains(cbPrimaryOrSec.Text)
+
                              select s;
                 dgTeachers.DataSource = search.ToList();
             }

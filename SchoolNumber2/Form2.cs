@@ -584,44 +584,44 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                
-                var key = Convert.ToInt32(dgStudents.SelectedCells[0].Value);  //dgStudents[0,i].Value
-                
-                var item = db.Students.Find(key);
-                
-                var ArchStudetn = new ArchiveOfStudent()
-                {
-                    Address = item.Address,
-                    Age = item.Age,
-                    ArchStudentsID = item.StudentsID,
-                    OVZ = item.OVZ,
-                    Class = item.Class,
-                    DOB = item.DOB,
-                    FirstName = item.FirstName,
-                    SurName = item.SurName,
-                    MiddleName = item.MiddleName,
-                    INN = item.INN,
-                    From = item.From,
-                    Where = DateTime.Today.ToString("dd/MM/yyyy") + " | " + tbNumberOfOrder.Text + " | " + tbWhere.Text,
-                    Pasport = item.Pasport,
-                    SNILS = item.SNILS,
-                    Sex = item.Sex,
-                    PMail = item.PMail,
-                    HeadOfTheClass = item.HeadOfTheClass,
-                    PPhone = item.PPhone,
-                    AcademicPerfomance = item.AcademicPerfomance,
-                    Activist = item.Activist,
-                    AddresLive = item.AddresLive,
-                    HealthCategory = item.HealthCategory,
-                    Invalid = item.Invalid,
-                    Sirota = item.Sirota,
-                    OVZGroup = item.OVZGroup,
-                    SOP = item.SOP
-                
-                };
-                db.Students.Remove(item);
-                db.ArchiveOfStudents.Add(ArchStudetn);
-                db.SaveChanges();                
+
+                    var key = Convert.ToInt32(dgStudents.SelectedCells[0].Value);  //dgStudents[0,i].Value
+
+                    var item = db.Students.Find(key);
+
+                    var ArchStudetn = new ArchiveOfStudent()
+                    {
+                        Address = item.Address,
+                        Age = item.Age,
+                        ArchStudentsID = item.StudentsID,
+                        OVZ = item.OVZ,
+                        Class = item.Class,
+                        DOB = item.DOB,
+                        FirstName = item.FirstName,
+                        SurName = item.SurName,
+                        MiddleName = item.MiddleName,
+                        INN = item.INN,
+                        From = item.From,
+                        Where = DateTime.Today.ToString("dd/MM/yyyy") + " | " + tbNumberOfOrder.Text + " | " + tbWhere.Text,
+                        Pasport = item.Pasport,
+                        SNILS = item.SNILS,
+                        Sex = item.Sex,
+                        PMail = item.PMail,
+                        HeadOfTheClass = item.HeadOfTheClass,
+                        PPhone = item.PPhone,
+                        AcademicPerfomance = item.AcademicPerfomance,
+                        Activist = item.Activist,
+                        AddresLive = item.AddresLive,
+                        HealthCategory = item.HealthCategory,
+                        Invalid = item.Invalid,
+                        Sirota = item.Sirota,
+                        OVZGroup = item.OVZGroup,
+                        SOP = item.SOP
+
+                    };
+                    db.Students.Remove(item);
+                    db.ArchiveOfStudents.Add(ArchStudetn);
+                    db.SaveChanges();
                 dgStudents.DataSource = db.Students.ToList();
             }
         }

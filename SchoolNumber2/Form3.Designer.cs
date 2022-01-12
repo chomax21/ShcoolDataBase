@@ -240,6 +240,7 @@ namespace SchoolNumber2
             this.tbT_ID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tbT_ID.Location = new System.Drawing.Point(39, 362);
             this.tbT_ID.Name = "tbT_ID";
+            this.tbT_ID.ReadOnly = true;
             this.tbT_ID.Size = new System.Drawing.Size(38, 23);
             this.tbT_ID.TabIndex = 17;
             // 

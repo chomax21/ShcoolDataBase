@@ -3,6 +3,8 @@ using System.Reflection;
 
 namespace SchoolNumber2
 {
+
+
     class SchoolDB_Context : DbContext
     {
         public DbSet<Teacher> Teachers { get; set; }
@@ -70,7 +72,7 @@ namespace SchoolNumber2
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Student>(entity =>
             {
-                entity.HasKey(e => e.StudentsID);   
+                entity.HasKey(e => e.StudentsID);
                 entity.Property(p => p.AcademicPerfomance).HasMaxLength(20);
                 entity.Property(p => p.Activist).HasMaxLength(20);
                 entity.Property(p => p.AddresLive).HasMaxLength(100);

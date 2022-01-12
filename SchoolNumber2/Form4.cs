@@ -208,41 +208,41 @@ namespace SchoolNumber2
             using (var db = new SchoolDB_Context())
             {
 
-                var key = Convert.ToInt32(dgArchStudents.SelectedCells[0].Value);
-                var item = db.ArchiveOfStudents.Find(key);
+                    var key = Convert.ToInt32(dgArchStudents.SelectedCells[0].Value);
+                    var item = db.ArchiveOfStudents.Find(key);
 
 
-                var student = new Student()
-                {
-                    Address = item.Address,
-                    Age = item.Age,
-                    StudentsID = item.ArchStudentsID,
-                    OVZ = item.OVZ,
-                    Class = item.Class,
-                    DOB = item.DOB,
-                    FirstName = item.FirstName,
-                    SurName = item.SurName,
-                    MiddleName = item.MiddleName,
-                    INN = item.INN,
-                    From = "Восстановлен " + dateTimePicker1.Text + " | " + tbNumberOfOrderArch.Text + " | " + item.From,
-                    Where = string.Empty,
-                    Pasport = item.Pasport,
-                    SNILS = item.SNILS,
-                    Sex = item.Sex,
-                    PMail = item.PMail,
-                    PPhone = item.PPhone,
-                    AcademicPerfomance = item.AcademicPerfomance,
-                    Activist = item.Activist,
-                    AddresLive = item.AddresLive,
-                    HealthCategory = item.HealthCategory,
-                    Invalid = item.Invalid,
-                    Sirota = item.Sirota,
-                    OVZGroup = item.OVZGroup,
-                    SOP = item.SOP
-                };
-                db.ArchiveOfStudents.Remove(item);
-                db.Students.Add(student);
-                db.SaveChanges();
+                    var student = new Student()
+                    {
+                        Address = item.Address,
+                        Age = item.Age,
+                        StudentsID = item.ArchStudentsID,
+                        OVZ = item.OVZ,
+                        Class = item.Class,
+                        DOB = item.DOB,
+                        FirstName = item.FirstName,
+                        SurName = item.SurName,
+                        MiddleName = item.MiddleName,
+                        INN = item.INN,
+                        From = "Восстановлен " + dateTimePicker1.Text + " | " + tbNumberOfOrderArch.Text + " | " + item.From,
+                        Where = string.Empty,
+                        Pasport = item.Pasport,
+                        SNILS = item.SNILS,
+                        Sex = item.Sex,
+                        PMail = item.PMail,
+                        PPhone = item.PPhone,
+                        AcademicPerfomance = item.AcademicPerfomance,
+                        Activist = item.Activist,
+                        AddresLive = item.AddresLive,
+                        HealthCategory = item.HealthCategory,
+                        Invalid = item.Invalid,
+                        Sirota = item.Sirota,
+                        OVZGroup = item.OVZGroup,
+                        SOP = item.SOP
+                    };
+                    db.ArchiveOfStudents.Remove(item);
+                    db.Students.Add(student);
+                    db.SaveChanges();
                 
                 dgArchStudents.DataSource = db.ArchiveOfStudents.ToList();
                 Show();

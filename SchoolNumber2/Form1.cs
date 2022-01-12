@@ -42,12 +42,16 @@ namespace SchoolNumber2
                 label1.Text = sizeDbStudents.ToString();
 
                 int sizeDbTeachers = db.Teachers.Count(); // Сколько сотрудников в базе данных
-                label2.Text = sizeDbTeachers.ToString();               
+                label2.Text = sizeDbTeachers.ToString();
             }
 
             await Task.Run(() => SearchDeadListTeacherCours());   
             await Task.Run(() => StudentAgeCalculating());   
             await Task.Run(() => TeacherAgeCalculating());   
+                }
+                // Сделать вывод ИД курсов для последующего вывода сотрудников чьи курсы просроченны или скоро закончатся.
+                // С помощью Join LINQ
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)

@@ -1,5 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
+using System.Drawing;
+using System.Text;
+using System.Windows.Forms;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -12,10 +17,10 @@ namespace SchoolNumber2
         {
             InitializeComponent();
         }
-
+        
         public FinalGradeForm(Form2 form2) // Используем конструктор формы. Попадаем в форму оценок через форму Форму2(Основная форма для работы с БД учеников) с использованием 
         {                                  // значений из последней формы.
-
+            
             InitializeComponent();
             lbClass.Text = form2.tbClass.Text;
             lbID.Text = form2.tb_ID.Text;
@@ -40,8 +45,8 @@ namespace SchoolNumber2
         }
 
         private void FinalGradeForm_Load(object sender, EventArgs e) // Ищем за какой класс для ученика выдать оценки.
-        {
-
+        {     
+            
             string countClass = lbClass.Text;
 
             string intCountClassResult = string.Empty;
@@ -57,151 +62,151 @@ namespace SchoolNumber2
             {
                 val = int.Parse(intCountClassResult);
                 searchClass = val;
-            }
+            }                       
 
             if (searchClass <= 4) // С первого по четвертый класс свои предметы.
-            {
-                label6.Visible = true;
-                label7.Visible = true;
-                label8.Visible = true;
-                label9.Visible = true;
-                label10.Visible = true;
-                label15.Visible = true;
-                label14.Visible = true;
-                label13.Visible = true;
-                label12.Visible = true;
-                label11.Visible = true;
-                label20.Visible = true;
-                label19.Visible = true;
-                label18.Visible = true;
-                label17.Visible = true;
-                label16.Visible = true;
-                label25.Visible = true;
-                tbChtenRodYazChuv.Visible = true;
-                tbChtenRodYazRuss.Visible = true;
-                tbFIZRA.Visible = true;
-                tbGosYazChuv.Visible = true;
-                tbHistCultRodnKray.Visible = true;
-                tbInostYazEng.Visible = true;
-                tbIZO.Visible = true;
-                tbLiteratura.Visible = true;
-                tbMatematika.Visible = true;
-                tbMuzika.Visible = true;
-                tbOkrMir.Visible = true;
-                tbOkrMir.Visible = true;
-                tbOsnovReligSvetskEtiki.Visible = true;
-                tbRodnoyYazRuss.Visible = true;
-                tbRodnoyYzChuv.Visible = true;
-                tbRusskiyYaz.Visible = true;
-                tbTechnology.Visible = true;
-                this.Width = 660;
+                {
+                    label6.Visible = true;
+                    label7.Visible = true;
+                    label8.Visible = true;
+                    label9.Visible = true;
+                    label10.Visible = true;
+                    label15.Visible = true;
+                    label14.Visible = true;
+                    label13.Visible = true;
+                    label12.Visible = true;
+                    label11.Visible = true;
+                    label20.Visible = true;
+                    label19.Visible = true;
+                    label18.Visible = true;
+                    label17.Visible = true;
+                    label16.Visible = true;
+                    label25.Visible = true;
+                    tbChtenRodYazChuv.Visible = true;
+                    tbChtenRodYazRuss.Visible = true;
+                    tbFIZRA.Visible = true;
+                    tbGosYazChuv.Visible = true;
+                    tbHistCultRodnKray.Visible = true;
+                    tbInostYazEng.Visible = true;
+                    tbIZO.Visible = true;
+                    tbLiteratura.Visible = true;
+                    tbMatematika.Visible = true;
+                    tbMuzika.Visible = true;
+                    tbOkrMir.Visible = true;
+                    tbOkrMir.Visible = true;
+                    tbOsnovReligSvetskEtiki.Visible = true;
+                    tbRodnoyYazRuss.Visible = true;
+                    tbRodnoyYzChuv.Visible = true;
+                    tbRusskiyYaz.Visible = true;
+                    tbTechnology.Visible = true;
+                    this.Width = 660;
                 this.Height = 540;
-                button2.Location.Offset(10, 435);
-            }
+                    button2.Location.Offset(10, 435);
+                }
             if (searchClass >= 5 && searchClass <= 9) // С пятого по девятый класс свои предметы.
             {
-                tbChtenRodYazChuv.Visible = true;
-                tbChtenRodYazRuss.Visible = true;
-                tbFIZRA.Visible = true;
-                tbAlgebra.Visible = true;
-                tbHistCultRodnKray.Visible = true;
-                tbInostYazEng.Visible = true;
-                tbIZO.Visible = true;
-                tbLiteratura.Visible = true;
-                tbMatematika.Visible = true;
-                tbMuzika.Visible = true;
-                tbOkrMir.Visible = true;
-                tbOkrMir.Visible = true;
-                tbVtoroyInostYazGer.Visible = true;
-                tbRodnoyYazRuss.Visible = true;
-                tbRodnoyYzChuv.Visible = true;
-                tbRusskiyYaz.Visible = true;
-                tbTechnology.Visible = true;
-                tbFizika.Visible = true;
-                tbXimia.Visible = true;
-                tbObshestvo.Visible = true;
-                tbMoyGorod.Visible = true;
-                tbOBZ.Visible = true;
-                tbOsnDuxKultRuss.Visible = true;
-                tbInformatika.Visible = true;
-                tbGeography.Visible = true;
-                tbGeometry.Visible = true;
-                tbShahmate.Visible = true;
-                tbBiology.Visible = true;
-                tbHistRussVseOHistr.Visible = true;
-                tbMatematika.Location.Offset(498, 268);
-                label13.Location.Offset(408, 276);
-                tbVtoroyInostYazGer.Location.Offset(498, 211);
-                label24.Location.Offset(241, 219);
-                tbObshestvo.Location.Offset(498, 239);
-                label22.Location.Offset(376, 247);
-                tbFizika.Location.Offset(498, 442);
-                label26.Location.Offset(433, 450);
-                tbXimia.Location.Offset(498, 471);
-                label35.Location.Offset(438, 479);
-                tbBiology.Location.Offset(920, 158);
-                tbShahmate.Location.Offset(920, 187);
-                tbOBZ.Location.Offset(920, 215);
-                tbMoyGorod.Location.Offset(920, 244);
-                label31.Location.Offset(838, 252);
-                label32.Location.Offset(651, 223);
-                label33.Location.Offset(845, 195);
-                label34.Location.Offset(843, 166);
-                label30.Visible = true;
-                label28.Visible = true;
-                label29.Visible = true;
-                label21.Visible = true;
-                label27.Visible = true;
-                label26.Visible = true;
-                label35.Visible = true;
-                label34.Visible = true;
-                label33.Visible = true;
-                label32.Visible = true;
-                label31.Visible = true;
-                label6.Visible = true;
-                label7.Visible = true;
-                label8.Visible = true;
-                label9.Visible = true;
-                label10.Visible = true;
-                label15.Visible = true;
-                label14.Visible = true;
-                label13.Visible = true;
-                label12.Visible = true;
-                label20.Visible = true;
-                label19.Visible = true;
-                label18.Visible = true;
-                label17.Visible = true;
-                label16.Visible = true;
-                label22.Visible = true;
-                label23.Visible = true;
-                label24.Visible = true;
+                    tbChtenRodYazChuv.Visible = true;
+                    tbChtenRodYazRuss.Visible = true;
+                    tbFIZRA.Visible = true;
+                    tbAlgebra.Visible = true;
+                    tbHistCultRodnKray.Visible = true;
+                    tbInostYazEng.Visible = true;
+                    tbIZO.Visible = true;
+                    tbLiteratura.Visible = true;
+                    tbMatematika.Visible = true;
+                    tbMuzika.Visible = true;
+                    tbOkrMir.Visible = true;
+                    tbOkrMir.Visible = true;
+                    tbVtoroyInostYazGer.Visible = true;
+                    tbRodnoyYazRuss.Visible = true;
+                    tbRodnoyYzChuv.Visible = true;
+                    tbRusskiyYaz.Visible = true;
+                    tbTechnology.Visible = true;
+                    tbFizika.Visible = true;
+                    tbXimia.Visible = true;
+                    tbObshestvo.Visible = true;
+                    tbMoyGorod.Visible = true;
+                    tbOBZ.Visible = true;
+                    tbOsnDuxKultRuss.Visible = true;
+                    tbInformatika.Visible = true;
+                    tbGeography.Visible = true;
+                    tbGeometry.Visible = true;
+                    tbShahmate.Visible = true;
+                    tbBiology.Visible = true;
+                    tbHistRussVseOHistr.Visible = true;
+                    tbMatematika.Location.Offset(498, 268);
+                    label13.Location.Offset(408, 276);
+                    tbVtoroyInostYazGer.Location.Offset(498, 211);
+                    label24.Location.Offset(241, 219);
+                    tbObshestvo.Location.Offset(498, 239);
+                    label22.Location.Offset(376, 247);
+                    tbFizika.Location.Offset(498, 442);
+                    label26.Location.Offset(433, 450);
+                    tbXimia.Location.Offset(498, 471);
+                    label35.Location.Offset(438, 479);
+                    tbBiology.Location.Offset(920, 158);
+                    tbShahmate.Location.Offset(920, 187);
+                    tbOBZ.Location.Offset(920, 215);
+                    tbMoyGorod.Location.Offset(920, 244);
+                    label31.Location.Offset(838, 252);
+                    label32.Location.Offset(651, 223);
+                    label33.Location.Offset(845, 195);
+                    label34.Location.Offset(843, 166);
+                    label30.Visible = true;
+                    label28.Visible = true;
+                    label29.Visible = true;
+                    label21.Visible = true;
+                    label27.Visible = true;
+                    label26.Visible = true;
+                    label35.Visible = true;
+                    label34.Visible = true;
+                    label33.Visible = true;
+                    label32.Visible = true;
+                    label31.Visible = true;
+                    label6.Visible = true;
+                    label7.Visible = true;
+                    label8.Visible = true;
+                    label9.Visible = true;
+                    label10.Visible = true;
+                    label15.Visible = true;
+                    label14.Visible = true;
+                    label13.Visible = true;
+                    label12.Visible = true;
+                    label20.Visible = true;
+                    label19.Visible = true;
+                    label18.Visible = true;
+                    label17.Visible = true;
+                    label16.Visible = true;
+                    label22.Visible = true;
+                    label23.Visible = true;
+                    label24.Visible = true;
 
-            }
+                }
             if (searchClass >= 10) // С десятого по одиннадцатый класс свои предметы.
             {
-                label6.Visible = true; tbRusskiyYaz.Visible = true;
-                label7.Visible = true; tbLiteratura.Visible = true;
-                label32.Visible = true; tbOBZ.Visible = true;
-                label22.Visible = true; tbObshestvo.Visible = true;
-                label37.Visible = true; tbPravo.Visible = true;
-                label38.Visible = true; tbHistory.Visible = true;
-                label39.Visible = true; tbEconomica.Visible = true;
-                label40.Visible = true; tbAlgebraProff.Visible = true;
-                label34.Visible = true; tbBiology.Visible = true;
-                label28.Visible = true; tbInformatika.Visible = true;
-                label14.Visible = true; tbInostYazEng.Visible = true;
-                label26.Visible = true; tbFizika.Visible = true;
-                label18.Visible = true; tbFIZRA.Visible = true;
-                //label30.Visible = true; tbAlgebra.Visible = true;
-                label15.Visible = true; tbChtenRodYazChuv.Visible = true;
-                //label29.Visible = true; tbGeometry.Visible = true;
-                label45.Visible = true; tbAnalizTeksta.Visible = true;
-                label36.Visible = true; tbAstronomy.Visible = true;
-                label15.Visible = true; tbChtenRodYazChuv.Visible = true;
-                label21.Visible = true; tbGeography.Visible = true;
-            }
+                    label6.Visible = true; tbRusskiyYaz.Visible = true;
+                    label7.Visible = true; tbLiteratura.Visible = true;
+                    label32.Visible = true; tbOBZ.Visible = true;
+                    label22.Visible = true; tbObshestvo.Visible = true;
+                    label37.Visible = true; tbPravo.Visible = true;
+                    label38.Visible = true; tbHistory.Visible = true;
+                    label39.Visible = true; tbEconomica.Visible = true;
+                    label40.Visible = true; tbAlgebraProff.Visible = true;
+                    label34.Visible = true; tbBiology.Visible = true;
+                    label28.Visible = true; tbInformatika.Visible = true;
+                    label14.Visible = true; tbInostYazEng.Visible = true;
+                    label26.Visible = true; tbFizika.Visible = true;
+                    label18.Visible = true; tbFIZRA.Visible = true;
+                    //label30.Visible = true; tbAlgebra.Visible = true;
+                    label15.Visible = true; tbChtenRodYazChuv.Visible = true;
+                    //label29.Visible = true; tbGeometry.Visible = true;
+                    label45.Visible = true; tbAnalizTeksta.Visible = true;
+                    label36.Visible = true; tbAstronomy.Visible = true;
+                    label15.Visible = true; tbChtenRodYazChuv.Visible = true;
+                    label21.Visible = true; tbGeography.Visible = true;
+                }
 
-
+            
         }
         public void ResetGradeTextBoxes()
         {
@@ -255,7 +260,7 @@ namespace SchoolNumber2
             {
                 using (var db = new SchoolDB_Context())
                 {
-                    var searchQuarter = from q in db.FinalGrades
+                    var searchQuarter = from q in db.FinalGrades 
                                         where q.WhatQuarter == cbQuarter.Text && q.SearchID == lbID.Text && q.WhatClass == cbClass.Text
                                         select q;
                     int resultSearchQuarter = searchQuarter.Count();
@@ -335,8 +340,8 @@ namespace SchoolNumber2
                         db.SaveChanges();
                         ResetGradeTextBoxes();
                         MessageBox.Show("Оценки внесены!", "Внимание!");
-
-
+                        
+                       
                     }
                     else if (searchClass >= 10 && resultSearchQuarter == 0)
                     {
@@ -368,7 +373,7 @@ namespace SchoolNumber2
                             MatematikaAlgebraIMatematikaAnalizGeometry = tbAlgebraProff.Text,
                             Astronomia = tbAstronomy.Text,
                             RaznoAspectnuyAnalizTeksta = tbAnalizTeksta.Text
-
+   
                         };
                         db.FinalGrades.Add(finalGrade);
                         db.SaveChanges();
@@ -379,17 +384,17 @@ namespace SchoolNumber2
                     {
                         MessageBox.Show("Оценки за данный период уже существуют!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                     }
-                }
+                }              
             }
             else
             {
                 MessageBox.Show("Нужно выбрать класс и период ", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
-
+            
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e) // Показать 
-        {
+        {  
         }
 
         private void button3_Click(object sender, EventArgs e) // Показать оценки.
@@ -445,7 +450,7 @@ namespace SchoolNumber2
                 }
             }
             else
-                MessageBox.Show("Нужно выбрать период и класс!", "Внимание!");
+                MessageBox.Show("Нужно выбрать период и класс!", "Внимание!");            
         }
 
 
@@ -456,9 +461,9 @@ namespace SchoolNumber2
                 var item = from x in db.FinalGrades
                            where x.SearchID == lbID.Text && x.WhatClass == cbClass.Text && x.WhatQuarter == cbQuarter.Text
                            select x;
-
+                
                 foreach (var findkey in item)
-                {
+                {                    
                     int resultKey = findkey.GradeID;
                     var newitem = db.FinalGrades.Find(resultKey);
                     if (newitem != null)
@@ -507,6 +512,7 @@ namespace SchoolNumber2
                         MessageBox.Show("Оценки отредактированны!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+                              
             }
             ResetGradeTextBoxes();
         }
@@ -681,7 +687,7 @@ namespace SchoolNumber2
             label43.Visible = false;
             label44.Visible = false;
             label45.Visible = false;
-
+            
             tbAlgebra.Visible = false;
             tbAlgebraProff.Visible = false;
             tbAnalizTeksta.Visible = false;
@@ -723,7 +729,7 @@ namespace SchoolNumber2
 
         private void cbClass_SelectionChangeCommitted(object sender, EventArgs e)
         {
-
+           
         }
 
         private void FinalGradeForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -731,5 +737,5 @@ namespace SchoolNumber2
             Hide();
         }
     }
-
+    
 }

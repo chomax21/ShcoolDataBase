@@ -17,6 +17,7 @@ namespace SchoolNumber2
             if (form3.tbT_ID.Text != string.Empty)
             {
                 TeacherId = Convert.ToInt32(form3.tbT_ID.Text);
+                succes = true;
                 tb_IDTeachCours.Text = TeacherId.ToString();
                 succes = true;
             }
