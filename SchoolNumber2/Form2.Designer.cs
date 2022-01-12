@@ -297,7 +297,6 @@ namespace SchoolNumber2
             this.tb_ID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tb_ID.Location = new System.Drawing.Point(41, 434);
             this.tb_ID.Name = "tb_ID";
-            this.tb_ID.ReadOnly = true;
             this.tb_ID.Size = new System.Drawing.Size(69, 23);
             this.tb_ID.TabIndex = 19;
             // 

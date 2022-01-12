@@ -14,13 +14,13 @@ namespace SchoolNumber2
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //optionsBuilder.UseSqlite("FileName=Scholl.db");
-            optionsBuilder.UseSqlite("FileName=Scholl.db", sqliteOptionsAction: op =>
-            {
-                op.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
-            });
+            optionsBuilder.UseSqlite("Data Source=Scholl.db");
+            //optionsBuilder.UseSqlite("FileName=Scholl.db", sqliteOptionsAction: op =>
+            //{
+            //    op.MigrationsAssembly(Assembly.GetExecutingAssembly().FullName);
+            //});
 
-            base.OnConfiguring(optionsBuilder);
+            //base.OnConfiguring(optionsBuilder);
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

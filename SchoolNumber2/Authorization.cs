@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Windows.Forms;
 
 namespace SchoolNumber2
@@ -14,7 +15,8 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                db.Database.EnsureCreated();
+                //db.Database.EnsureCreated();
+                db.Database.Migrate();
                 var item = db.LoginPasses.Find(1);
 
                 if (item == null)

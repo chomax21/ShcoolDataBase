@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace SchoolNumber2
@@ -33,34 +34,20 @@ namespace SchoolNumber2
             Hide();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private async void Form1_Load(object sender, EventArgs e)
         {
             using (var db = new SchoolDB_Context())
             {
-                int sizeDbStudents = db.Students.Count();
+                int sizeDbStudents = db.Students.Count(); // Сколько учеников в базе данных
                 label1.Text = sizeDbStudents.ToString();
 
-                int sizeDbTeachers = db.Teachers.Count();
-                label2.Text = sizeDbTeachers.ToString();
-
-                var searchDeadLineCours = from s in db.TeacherRefresherCourses
-                                          select s;
-                foreach (var item in searchDeadLineCours)
-                {
-                    var dateTimeCourseWhen = DateTime.Now;
-                    var dateTimeCourseDead = Convert.ToDateTime(item.DeadLineCours);
-                    TimeSpan resultTime = dateTimeCourseDead - dateTimeCourseWhen;
-                                     
-                  var key = Convert.ToInt32(item.CoursesID);
-                  var result = db.TeacherRefresherCourses.Find(key);
-                    if (result != null)
-                    {
-                         result.CoursHowMachYear = resultTime.Days;
-                         db.SaveChanges();
-                    };
-                    
-                }               
+                int sizeDbTeachers = db.Teachers.Count(); // Сколько сотрудников в базе данных
+                label2.Text = sizeDbTeachers.ToString();               
             }
+
+            await Task.Run(() => SearchDeadListTeacherCours());   
+            await Task.Run(() => StudentAgeCalculating());   
+            await Task.Run(() => TeacherAgeCalculating());   
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -81,6 +68,86 @@ namespace SchoolNumber2
         {
             Environment.Exit(0); 
             Application.Exit();
+        }
+
+        private void StudentAgeCalculating()
+        {
+            using (var db = new SchoolDB_Context())
+            {
+                var ageCalculation = from s in db.Students
+                                     select s;
+                if (ageCalculation != null)
+                {
+                    foreach (var item in ageCalculation)
+                    {
+                        DateTime time1 = Convert.ToDateTime(item.DOB); // Происходит вычисление возраста на текущий момент.
+                        DateTime time2 = DateTime.Now;
+                        int timeResult = (time2 - time1).Days;
+                        int timeResult2 = timeResult / 365;
+
+                        if (Convert.ToInt32(item.Age) != timeResult2)
+                        {
+                            item.Age = timeResult2.ToString();
+                        }
+                        db.SaveChanges();
+                        //var result = db.Students.Find(item.StudentsID);
+                    }
+
+                }
+
+            }
+        }
+
+        private void TeacherAgeCalculating()
+        {
+            using (var db = new SchoolDB_Context())
+            {
+                var ageCalculation = from s in db.Teachers
+                                     select s;
+                if (ageCalculation != null)
+                {
+                    foreach (var item in ageCalculation)
+                    {
+                        DateTime time1 = Convert.ToDateTime(item.TDOB); // Происходит вычисление возраста на текущий момент.
+                        DateTime time2 = DateTime.Now;
+                        int timeResult = (time2 - time1).Days;
+                        int timeResult2 = timeResult / 365;
+
+                        if (Convert.ToInt32(item.TAge) != timeResult2)
+                        {
+                            item.TAge = timeResult2.ToString();
+                        }
+                        db.SaveChanges();
+                        //var result = db.Students.Find(item.StudentsID);
+                    }
+
+                }
+
+            }
+
+        }
+
+        private void SearchDeadListTeacherCours() // Пересчет оставшихся дней до окончания курсов учителей
+        {
+            using (var db = new SchoolDB_Context())
+            {
+                var searchDeadLineCours = from s in db.TeacherRefresherCourses 
+                                          select s;
+                foreach (var item in searchDeadLineCours)
+                {
+                    var dateTimeCourseWhen = DateTime.Now;
+                    var dateTimeCourseDead = Convert.ToDateTime(item.DeadLineCours);
+                    TimeSpan resultTime = dateTimeCourseDead - dateTimeCourseWhen;
+
+                    var key = Convert.ToInt32(item.CoursesID);
+                    var result = db.TeacherRefresherCourses.Find(key);
+                    if (result != null)
+                    {
+                        result.CoursHowMachYear = resultTime.Days;
+                        db.SaveChanges();
+                    };
+                }
+            }
         }
     }
 }
