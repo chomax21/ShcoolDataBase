@@ -34,6 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tbFilter = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.cbMark = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgShowDeadCours)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,6 +52,7 @@
             this.dgShowDeadCours.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgShowDeadCours.Size = new System.Drawing.Size(935, 434);
             this.dgShowDeadCours.TabIndex = 0;
+            this.dgShowDeadCours.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgShowDeadCours_CellDoubleClick);
             // 
             // button1
             // 
@@ -90,12 +93,38 @@
             this.button2.Text = "Отобразить";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.button2.MouseEnter += new System.EventHandler(this.button2_MouseEnter);
+            // 
+            // label5
+            // 
+            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(709, 452);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(62, 15);
+            this.label5.TabIndex = 19;
+            this.label5.Text = "Отмечен :";
+            this.label5.MouseEnter += new System.EventHandler(this.label5_MouseEnter);
+            // 
+            // cbMark
+            // 
+            this.cbMark.FormattingEnabled = true;
+            this.cbMark.Items.AddRange(new object[] {
+            "Да",
+            "Нет",
+            "-"});
+            this.cbMark.Location = new System.Drawing.Point(771, 447);
+            this.cbMark.Name = "cbMark";
+            this.cbMark.Size = new System.Drawing.Size(90, 23);
+            this.cbMark.TabIndex = 18;
             // 
             // ShowListDeadCoursForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(936, 487);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.cbMark);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.tbFilter);
             this.Controls.Add(this.label1);
@@ -120,5 +149,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox tbFilter;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox cbMark;
     }
 }

@@ -7,7 +7,7 @@ using System.Windows.Forms;
 namespace SchoolNumber2
 {
     public partial class Form1 : Form
-    {
+    { 
         public Form1()
         {
             InitializeComponent();
@@ -48,10 +48,10 @@ namespace SchoolNumber2
             await Task.Run(() => SearchDeadListTeacherCours());   
             await Task.Run(() => StudentAgeCalculating());   
             await Task.Run(() => TeacherAgeCalculating());   
-                }
+                
                 // Сделать вывод ИД курсов для последующего вывода сотрудников чьи курсы просроченны или скоро закончатся.
                 // С помощью Join LINQ
-            }
+            
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -155,3 +155,4 @@ namespace SchoolNumber2
         }
     }
 }
+

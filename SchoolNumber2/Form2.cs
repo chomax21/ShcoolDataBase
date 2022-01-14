@@ -358,7 +358,7 @@ namespace SchoolNumber2
 
         private async void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
         {
-            try
+            if (tb_ID.Text != string.Empty)
             {
                 var wprint = new WordPrint("Doc1.docx");
 
@@ -392,14 +392,8 @@ namespace SchoolNumber2
                 };
 
                 await Task.Run(() => wprint.Process(items));
-                 //wprint.Process(items);
-
+                //wprint.Process(items);   
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
 
         }
 

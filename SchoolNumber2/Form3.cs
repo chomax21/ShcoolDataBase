@@ -351,7 +351,7 @@ namespace SchoolNumber2
 
         private async void button8_Click(object sender, EventArgs e)
         {
-            try
+            if (tbT_ID.Text != string.Empty)
             {
                 var wprint = new WordPrint("DocTeachers.docx");
 
@@ -392,12 +392,7 @@ namespace SchoolNumber2
                 {"<BASECLASS>", tbTBaseCl.Text }
                 };
                 await Task.Run(() => wprint.Process(items));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
+            }                          
         }
 
         private void button9_Click(object sender, EventArgs e)

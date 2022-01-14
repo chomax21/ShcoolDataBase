@@ -8,6 +8,8 @@ namespace SchoolNumber2
     public partial class ShowListDeadCoursForm : Form
     {
         public int filterDays { get; set; } = 182;
+        public int searchID { get; set; }
+        public bool markCours { get; set; }
         public ShowListDeadCoursForm()
         {
             InitializeComponent();
@@ -25,7 +27,31 @@ namespace SchoolNumber2
             {
                 var showResult = from t in db.Teachers
                                  join tc in db.TeacherRefresherCourses on t.TeachersID equals tc.SearchTeacherID
-                                 where tc.CoursHowMachYear <= filterDays // дней
+                                 where tc.CoursHowMachYear <= filterDays
+                                 select new
+                                 {
+                                     ID = t.TeachersID,
+                                     SName = t.TSurName,
+                                     Name = t.TName,
+                                     MName = t.TMiddleName,
+                                     Course = tc.NameCours,
+                                     CoursHowMachYear = tc.CoursHowMachYear,
+                                     CoursDate = tc.CoursDate,
+                                     DeadLineCours = tc.DeadLineCours
+                                 };
+                dgShowDeadCours.DataSource = showResult.ToList();
+                ChangeColomnNames();
+            }
+
+        }
+
+        private void ShowListOnMark()
+        {
+            using (var db = new SchoolDB_Context())
+            {
+                var showResult = from t in db.Teachers
+                                 join tc in db.TeacherRefresherCourses on t.TeachersID equals tc.SearchTeacherID
+                                 where tc.CoursHowMachYear <= filterDays && tc.marked == markCours
                                  select new
                                  {
                                      ID = t.TeachersID,
@@ -74,7 +100,40 @@ namespace SchoolNumber2
         private void button2_Click(object sender, EventArgs e)
         {
             filterDays = Convert.ToInt32(tbFilter.Text);
-            ShowList();
+            if (cbMark.Text == "-")
+            {
+                ShowList();
+            }
+            else
+            {
+                markCours = cbMark.Text == "Да" ? true : false;
+                ShowListOnMark();
+                if (markCours) cbMark.SelectedIndex = 0;
+                else cbMark.SelectedIndex = 1;
+            }
+           
+        }
+
+        private void dgShowDeadCours_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            searchID = (int)dgShowDeadCours.SelectedCells[0].Value;
+            TeacherCoursForm form = new TeacherCoursForm(this);
+            form.Show();
+        }
+
+        private void label5_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(label5, "Дополнительная сортировка по флагу. Если вы отметили для себя этот курс\n" +
+                                       " то можете его скрыть в отображении для большего удобства.");
+        }
+
+        private void button2_MouseEnter(object sender, EventArgs e)
+        {
+            ToolTip toolTip = new ToolTip();
+            toolTip.SetToolTip(button2,"Двойной щелчек по конкретному курсу перенесёт вас в\n" +
+                                       " форму редактирование курсов данного сотрудника");
+                                      
         }
     }
 }
