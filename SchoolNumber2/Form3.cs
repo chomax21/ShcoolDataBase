@@ -395,7 +395,7 @@ namespace SchoolNumber2
             }                          
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e) // Поиск и сортировка.
         {
             using (var db = new SchoolDB_Context())
             {
@@ -416,13 +416,12 @@ namespace SchoolNumber2
                              where s.HonorEmploy.Contains(cbHonorEmp.Text)
                              where s.YangSpicialist.Contains(cbYangEmp.Text)
                              where s.PrimaryOrSecondary.Contains(cbPrimaryOrSec.Text)
-
                              select s;
                 dgTeachers.DataSource = search.ToList();
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e) // Кнопка для вывода формы курсов сотрудников.
         {
             if (tbT_ID.Text != string.Empty)
             {
@@ -436,7 +435,7 @@ namespace SchoolNumber2
             
         }
 
-        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e) // Закрываем форму сотрудников. Возвращаемся к основной форме.
         {
             Form1 form1 = new Form1();
             form1.Show();
