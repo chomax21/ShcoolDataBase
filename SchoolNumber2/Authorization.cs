@@ -29,17 +29,6 @@ namespace SchoolNumber2
             textBox2.UseSystemPasswordChar = true; // Скрытые вводимого пароля.
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e) // Вкл/Выкл сокрытия пароля.
-        {
-
-
-        }
-
         private void button1_Click_1(object sender, EventArgs e) // Авторизация и проверка логиа/пароля.
         {
             using (var db = new SchoolDB_Context())

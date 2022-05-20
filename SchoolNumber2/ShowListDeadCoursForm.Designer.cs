@@ -108,6 +108,7 @@
             // 
             // cbMark
             // 
+            this.cbMark.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.cbMark.FormattingEnabled = true;
             this.cbMark.Items.AddRange(new object[] {
             "Да",

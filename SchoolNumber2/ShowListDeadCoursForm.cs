@@ -18,6 +18,7 @@ namespace SchoolNumber2
         private void ShowListDeadCoursForm_Load(object sender, EventArgs e)
         {
             tbFilter.Text = filterDays.ToString();
+            cbMark.Text = "-";
             ShowList();
         }
 
@@ -108,8 +109,10 @@ namespace SchoolNumber2
             {
                 markCours = cbMark.Text == "Да" ? true : false;
                 ShowListOnMark();
-                if (markCours) cbMark.SelectedIndex = 0;
-                else cbMark.SelectedIndex = 1;
+                if (markCours)
+                    cbMark.SelectedIndex = 0;
+                else
+                    cbMark.SelectedIndex = 1;
             }
            
         }
