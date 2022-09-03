@@ -177,6 +177,7 @@ namespace SchoolNumber2
                                where s.Invalid.Contains(cbInvalid.Text)
                                where s.Age.Contains(tbAge.Text)
                                where s.PPhone.Contains(tbPPhone.Text)
+                               orderby s.Class
                                select s;
                 dgStudents.DataSource = students.ToList();
 
@@ -421,8 +422,11 @@ namespace SchoolNumber2
 
         private void button9_Click_1(object sender, EventArgs e) // Отобразить архив.
         {
-            Form4 form4 = new Form4();
-            form4.Show();
+            if (!Application.OpenForms.OfType<Form4>().Any()) // Проверяем не открыта ли уже такая форма, если да, то игнорируем.
+            {
+                Form4 form4 = new Form4();
+                form4.Show();
+            }           
         }
 
         private void button10_Click(object sender, EventArgs e) // Переводим всех на год вперед. 11 и 9 Класс уходит в архив.
@@ -497,9 +501,9 @@ namespace SchoolNumber2
                         val++;
 
                         item.Class = (val + stringCountClassResult).ToString();
-                        db.SaveChanges();
-                        dgStudents.DataSource = db.Students.ToList();
+                        db.SaveChanges();                        
                     }
+                    dgStudents.DataSource = db.Students.ToList();
                 }
             }
         }
@@ -711,8 +715,11 @@ namespace SchoolNumber2
 
         private void button16_Click(object sender, EventArgs e) // Кнопка отображения итоговых оценок.
         {
-            FinalGradeForm gradeForm = new FinalGradeForm(this);
-            gradeForm.Show();
+            if (!Application.OpenForms.OfType<FinalGradeForm>().Any()) // Проверяем не открыта ли уже такая форма, если да, то игнорируем.
+            {
+                FinalGradeForm gradeForm = new FinalGradeForm(this);
+                gradeForm.Show();
+            }            
         }
 
         private void button17_Click(object sender, EventArgs e)

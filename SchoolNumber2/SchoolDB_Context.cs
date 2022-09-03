@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace SchoolNumber2
 {
@@ -70,7 +69,7 @@ namespace SchoolNumber2
             modelBuilder.Entity<Student>().ToTable("Students");
             modelBuilder.Entity<Student>(entity =>
             {
-                entity.HasKey(e => e.StudentsID);   
+                entity.HasKey(e => e.StudentsID);
                 entity.Property(p => p.AcademicPerfomance).HasMaxLength(20);
                 entity.Property(p => p.Activist).HasMaxLength(20);
                 entity.Property(p => p.AddresLive).HasMaxLength(100);
