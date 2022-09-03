@@ -723,11 +723,6 @@ namespace SchoolNumber2
 
         }
 
-        private void cbClass_SelectionChangeCommitted(object sender, EventArgs e)
-        {
-
-        }
-
         private void FinalGradeForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Hide();

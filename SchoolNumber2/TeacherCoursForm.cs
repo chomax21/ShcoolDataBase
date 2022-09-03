@@ -28,7 +28,10 @@ namespace SchoolNumber2
             InitializeComponent(); // Здесь уже приходит ID в виде целого числа(int), поэтому если что-то не так будет отображаться нулевой ID. Дефолтный для int.
             TeacherId = form.searchID;
             tb_IDTeachCours.Text = TeacherId.ToString();
-            succes = true; // Это здесь излишне, но для работы нужно.
+            if (tb_IDTeachCours.Text!=null)
+            {
+                succes = true; // Это здесь излишне, но для работы нужно.
+            }            
         }
 
         private void EmptyTextboxs()
