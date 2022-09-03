@@ -3,13 +3,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SchoolNumber2
 {
-    public class Student
-    {
-
-        public int StudentsID { get; set; } 
+     public class Student
+    {        
+        public int StudentsID { get; set; }
         public string Class { get; set; }
         public string SurName { get; set; }
-        public string FirstName { get; set; }
+        public string FirstName { get; set; }       
         public string MiddleName { get; set; }
         public string DOB { get; set; }
         public string Age { get; set; }
@@ -29,8 +28,8 @@ namespace SchoolNumber2
         public string AcademicPerfomance { get; set; }
         public string Activist { get; set; }
         public string HeadOfTheClass { get; set; }
-        public string HealthCategory { get; set; }
+        public string HealthCategory { get; set; }          
         public string From { get; set; }
-        public string Where { get; set; }
+        public string Where { get; set; }        
     }
 }

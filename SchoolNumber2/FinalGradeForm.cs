@@ -3,6 +3,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 
+
 namespace SchoolNumber2
 {
     public partial class FinalGradeForm : Form
@@ -507,6 +508,7 @@ namespace SchoolNumber2
                         MessageBox.Show("Оценки отредактированны!", "Успешно!", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+
             }
             ResetGradeTextBoxes();
         }

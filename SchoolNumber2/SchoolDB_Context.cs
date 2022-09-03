@@ -2,6 +2,8 @@
 
 namespace SchoolNumber2
 {
+
+
     class SchoolDB_Context : DbContext
     {
         public DbSet<Teacher> Teachers { get; set; }

@@ -351,7 +351,7 @@ namespace SchoolNumber2
 
         private async void button8_Click(object sender, EventArgs e)
         {
-            try
+            if (tbT_ID.Text != string.Empty)
             {
                 var wprint = new WordPrint("DocTeachers.docx");
 
@@ -392,15 +392,10 @@ namespace SchoolNumber2
                 {"<BASECLASS>", tbTBaseCl.Text }
                 };
                 await Task.Run(() => wprint.Process(items));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
+            }                          
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e) // Поиск и сортировка.
         {
             using (var db = new SchoolDB_Context())
             {
@@ -427,7 +422,7 @@ namespace SchoolNumber2
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e) // Кнопка для вывода формы курсов сотрудников.
         {
             if (!Application.OpenForms.OfType<TeacherCoursForm>().Any())
             {
@@ -443,7 +438,7 @@ namespace SchoolNumber2
             }                       
         }
 
-        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e) // Закрываем форму сотрудников. Возвращаемся к основной форме.
         {
             Form1 form1 = new Form1();
             form1.Show();
