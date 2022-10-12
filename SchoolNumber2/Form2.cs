@@ -160,7 +160,6 @@ namespace SchoolNumber2
             using (var db = new SchoolDB_Context())
             {
                 var students = from s in db.Students
-                               where s.StudentsID == Convert.ToInt32(tb_ID.Text)
                                where s.Class.StartsWith(tbClass.Text)
                                where s.FirstName.Contains(tbName.Text)
                                where s.MiddleName.Contains(tbMName.Text)
@@ -176,6 +175,7 @@ namespace SchoolNumber2
                                where s.Age.Contains(tbAge.Text)
                                where s.PPhone.Contains(tbPPhone.Text)
                                select s;
+
                 dgStudents.DataSource = students.ToList();
 
             };

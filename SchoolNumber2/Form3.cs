@@ -130,7 +130,6 @@ namespace SchoolNumber2
                 tbRate.Text = dgTeachers.SelectedCells[17].Value.ToString();
                 tbTSpecialization.Text = dgTeachers.SelectedCells[18].Value.ToString();                                
 
-
                 if (dgTeachers.SelectedCells[19].Value != null)
                     cbSpecItem.Text = dgTeachers.SelectedCells[19].Value.ToString();
                 else
@@ -316,13 +315,42 @@ namespace SchoolNumber2
         }
         public void ResetTeachersFields() // Сбрасываем значения полей.
         {
-            tbDopSpecItemHours.Text = string.Empty; tbDPUHours.Text = string.Empty; tbExpirience.Text = string.Empty; tbDPU.Text = string.Empty;
-            tbExpirienceTeach.Text = string.Empty; tbGPDHours.Text = string.Empty; tbSpecItemHours.Text = string.Empty; tbTAdress.Text = string.Empty; tbTAge.Text = string.Empty;
-            tbTBaseCl.Text = string.Empty; tbTEmail.Text = string.Empty; tbTINN.Text = string.Empty; tbTMName.Text = string.Empty; tbTName.Text = string.Empty; tbTPassport.Text = string.Empty;
-            tbTPhone.Text = string.Empty; tbTPhone.Text = string.Empty; tbTSName.Text = string.Empty; tbTSNILS.Text = string.Empty; tbTSpecialization.Text = string.Empty;
-            tbT_ID.Text = string.Empty; cbCategory.Text = string.Empty; cbDopSpecItem.Text = string.Empty; cbSpecItem.Text = string.Empty; dateTimePicker2.Text = string.Empty;
-            tbPFD.Text = string.Empty; tbPFDHours.Text = string.Empty; tbKPK.Text = string.Empty; tbRate.Text = string.Empty; tbCoefficient.Text = string.Empty; tbAdressLive.Text = string.Empty;
-            cbHonorEmp.Text = string.Empty; cbYangEmp.Text = string.Empty; cbPrimaryOrSec.Text = string.Empty; tbEducation.Text = string.Empty; tbEducationSpec.Text = string.Empty;
+            tbDopSpecItemHours.Text = string.Empty;
+            tbDPUHours.Text = string.Empty;
+            tbExpirience.Text = string.Empty;
+            tbDPU.Text = string.Empty;
+            tbExpirienceTeach.Text = string.Empty;
+            tbGPDHours.Text = string.Empty;
+            tbSpecItemHours.Text = string.Empty;
+            tbTAdress.Text = string.Empty;
+            tbTAge.Text = string.Empty;
+            tbTBaseCl.Text = string.Empty;
+            tbTEmail.Text = string.Empty;
+            tbTINN.Text = string.Empty;
+            tbTMName.Text = string.Empty;
+            tbTName.Text = string.Empty;
+            tbTPassport.Text = string.Empty;
+            tbTPhone.Text = string.Empty;
+            tbTPhone.Text = string.Empty;
+            tbTSName.Text = string.Empty;
+            tbTSNILS.Text = string.Empty;
+            tbTSpecialization.Text = string.Empty;
+            tbT_ID.Text = string.Empty;
+            cbCategory.Text = string.Empty;
+            cbDopSpecItem.Text = string.Empty;
+            cbSpecItem.Text = string.Empty;
+            dateTimePicker2.Text = string.Empty;
+            tbPFD.Text = string.Empty;
+            tbPFDHours.Text = string.Empty;
+            tbKPK.Text = string.Empty;
+            tbRate.Text = string.Empty;
+            tbCoefficient.Text = string.Empty;
+            tbAdressLive.Text = string.Empty;
+            cbHonorEmp.Text = string.Empty;
+            cbYangEmp.Text = string.Empty;
+            cbPrimaryOrSec.Text = string.Empty;
+            tbEducation.Text = string.Empty;
+            tbEducationSpec.Text = string.Empty;
         }
 
         private void button6_Click(object sender, EventArgs e) // Кнопка вызываюшая метод сброса полей.
@@ -400,7 +428,6 @@ namespace SchoolNumber2
             using (var db = new SchoolDB_Context())
             {
                 var search = from s in db.Teachers
-                             where s.TeachersID == Convert.ToInt32(tbT_ID.Text)
                              where s.TName.Contains(tbTName.Text)
                              where s.TSurName.Contains(tbTSName.Text)
                              where s.TMiddleName.Contains(tbTMName.Text)
