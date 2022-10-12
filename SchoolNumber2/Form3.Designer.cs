@@ -125,7 +125,7 @@ namespace SchoolNumber2
             this.button4.Location = new System.Drawing.Point(208, 535);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 28);
-            this.button4.TabIndex = 9;
+            this.button4.TabIndex = 100;
             this.button4.Text = "Назад";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -184,7 +184,7 @@ namespace SchoolNumber2
             this.dgTeachers.RowTemplate.Height = 25;
             this.dgTeachers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgTeachers.Size = new System.Drawing.Size(1350, 329);
-            this.dgTeachers.TabIndex = 5;
+            this.dgTeachers.TabIndex = 101;
             this.dgTeachers.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.dgTeachers_CellMouseClick);
             // 
             // tbTName
@@ -225,7 +225,7 @@ namespace SchoolNumber2
             this.tbTBaseCl.Location = new System.Drawing.Point(603, 498);
             this.tbTBaseCl.Name = "tbTBaseCl";
             this.tbTBaseCl.Size = new System.Drawing.Size(137, 23);
-            this.tbTBaseCl.TabIndex = 35;
+            this.tbTBaseCl.TabIndex = 29;
             // 
             // tbTPhone
             // 
@@ -358,7 +358,7 @@ namespace SchoolNumber2
             this.button5.Location = new System.Drawing.Point(289, 534);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(76, 29);
-            this.button5.TabIndex = 29;
+            this.button5.TabIndex = 103;
             this.button5.Text = "Excel";
             this.button5.UseVisualStyleBackColor = false;
             this.button5.Click += new System.EventHandler(this.button5_Click);
@@ -501,7 +501,7 @@ namespace SchoolNumber2
             this.cbCategory.Location = new System.Drawing.Point(970, 452);
             this.cbCategory.Name = "cbCategory";
             this.cbCategory.Size = new System.Drawing.Size(72, 23);
-            this.cbCategory.TabIndex = 28;
+            this.cbCategory.TabIndex = 23;
             // 
             // cbSpecItem
             // 
@@ -654,7 +654,7 @@ namespace SchoolNumber2
             this.tbGPDHours.Location = new System.Drawing.Point(157, 498);
             this.tbGPDHours.Name = "tbGPDHours";
             this.tbGPDHours.Size = new System.Drawing.Size(84, 23);
-            this.tbGPDHours.TabIndex = 23;
+            this.tbGPDHours.TabIndex = 26;
             // 
             // label21
             // 
@@ -672,7 +672,7 @@ namespace SchoolNumber2
             this.tbDPU.Location = new System.Drawing.Point(748, 498);
             this.tbDPU.Name = "tbDPU";
             this.tbDPU.Size = new System.Drawing.Size(140, 23);
-            this.tbDPU.TabIndex = 24;
+            this.tbDPU.TabIndex = 30;
             // 
             // label22
             // 
@@ -690,7 +690,7 @@ namespace SchoolNumber2
             this.tbDPUHours.Location = new System.Drawing.Point(893, 498);
             this.tbDPUHours.Name = "tbDPUHours";
             this.tbDPUHours.Size = new System.Drawing.Size(124, 23);
-            this.tbDPUHours.TabIndex = 25;
+            this.tbDPUHours.TabIndex = 31;
             // 
             // label23
             // 
@@ -821,7 +821,7 @@ namespace SchoolNumber2
             this.tbPFD.Location = new System.Drawing.Point(1023, 498);
             this.tbPFD.Name = "tbPFD";
             this.tbPFD.Size = new System.Drawing.Size(100, 23);
-            this.tbPFD.TabIndex = 26;
+            this.tbPFD.TabIndex = 32;
             // 
             // label30
             // 
@@ -839,7 +839,7 @@ namespace SchoolNumber2
             this.tbPFDHours.Location = new System.Drawing.Point(1129, 498);
             this.tbPFDHours.Name = "tbPFDHours";
             this.tbPFDHours.Size = new System.Drawing.Size(89, 23);
-            this.tbPFDHours.TabIndex = 27;
+            this.tbPFDHours.TabIndex = 33;
             // 
             // cbHonorEmp
             // 
@@ -851,7 +851,7 @@ namespace SchoolNumber2
             this.cbHonorEmp.Location = new System.Drawing.Point(1048, 452);
             this.cbHonorEmp.Name = "cbHonorEmp";
             this.cbHonorEmp.Size = new System.Drawing.Size(124, 23);
-            this.cbHonorEmp.TabIndex = 29;
+            this.cbHonorEmp.TabIndex = 24;
             // 
             // label31
             // 
@@ -873,7 +873,7 @@ namespace SchoolNumber2
             this.cbYangEmp.Location = new System.Drawing.Point(247, 498);
             this.cbYangEmp.Name = "cbYangEmp";
             this.cbYangEmp.Size = new System.Drawing.Size(132, 23);
-            this.cbYangEmp.TabIndex = 30;
+            this.cbYangEmp.TabIndex = 27;
             // 
             // label32
             // 
@@ -901,7 +901,7 @@ namespace SchoolNumber2
             this.tbCoefficient.Location = new System.Drawing.Point(1179, 452);
             this.tbCoefficient.Name = "tbCoefficient";
             this.tbCoefficient.Size = new System.Drawing.Size(80, 23);
-            this.tbCoefficient.TabIndex = 31;
+            this.tbCoefficient.TabIndex = 25;
             // 
             // label35
             // 
@@ -923,7 +923,7 @@ namespace SchoolNumber2
             this.cbPrimaryOrSec.Location = new System.Drawing.Point(390, 498);
             this.cbPrimaryOrSec.Name = "cbPrimaryOrSec";
             this.cbPrimaryOrSec.Size = new System.Drawing.Size(207, 23);
-            this.cbPrimaryOrSec.TabIndex = 34;
+            this.cbPrimaryOrSec.TabIndex = 28;
             // 
             // textBox1
             // 

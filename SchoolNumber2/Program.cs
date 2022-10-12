@@ -22,10 +22,5 @@ namespace SchoolNumber2
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Authorization());
         }
-
-       
-
-       
-
     }
 }

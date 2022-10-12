@@ -100,8 +100,6 @@ namespace SchoolNumber2
                     GetCountStudentsInDataBase();
                 }
             }
-
-
         }
 
         private void button4_Click(object sender, EventArgs e) // Форма ушла, пришла форма.
@@ -175,7 +173,10 @@ namespace SchoolNumber2
                                where s.AcademicPerfomance.Contains(cbAcadPerfm.Text)
                                where s.Invalid.Contains(cbInvalid.Text)
                                where s.Age.Contains(tbAge.Text)
+                               where s.PPhone.Contains(tbPPhone.Text)
+                               orderby s.Class
                                select s;
+
                 dgStudents.DataSource = students.ToList();
 
             };
@@ -208,83 +209,6 @@ namespace SchoolNumber2
             ResetField();
         }
 
-        private void dataGridView1_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)  // Выделяем и заполняем Текстбоксы.
-        {
-            try
-            {
-                tb_ID.Text = dgStudents.SelectedCells[0].Value.ToString();
-                tbClass.Text = dgStudents.SelectedCells[1].Value.ToString();
-                tbSName.Text = dgStudents.SelectedCells[2].Value.ToString();
-                tbName.Text = dgStudents.SelectedCells[3].Value.ToString();
-                tbMName.Text = dgStudents.SelectedCells[4].Value.ToString();
-                dateTimePicker1.Text = dgStudents.SelectedCells[5].Value.ToString();
-                tbAge.Text = dgStudents.SelectedCells[6].Value.ToString();
-                if (dgStudents.SelectedCells[7].Value != null)
-                    cbSex.Text = dgStudents.SelectedCells[7].Value.ToString();
-                else
-                    cbSex.Text = "";
-
-                tbAddress.Text = dgStudents.SelectedCells[8].Value.ToString();
-                tbAdressLive.Text = dgStudents.SelectedCells[9].Value.ToString();
-                tbSNILS.Text = dgStudents.SelectedCells[10].Value.ToString();
-                tbINN.Text = dgStudents.SelectedCells[11].Value.ToString();
-                tbPasport.Text = dgStudents.SelectedCells[12].Value.ToString();
-                tbPPhone.Text = dgStudents.SelectedCells[13].Value.ToString();
-                tbPEmail.Text = dgStudents.SelectedCells[14].Value.ToString();
-                if (dgStudents.SelectedCells[15].Value != null)
-                    cbOVZ.Text = dgStudents.SelectedCells[15].Value.ToString();
-                else
-                    cbOVZ.Text = "";
-
-                if (dgStudents.SelectedCells[16].Value != null)
-                    cbOVZGroup.Text = dgStudents.SelectedCells[16].Value.ToString();
-                else
-                    cbOVZGroup.Text = "";
-
-                if (dgStudents.SelectedCells[17].Value != null)
-                    cbInvalid.Text = dgStudents.SelectedCells[17].Value.ToString();
-                else
-                    cbInvalid.Text = "";
-
-                if (dgStudents.SelectedCells[18].Value != null)
-                    cbSirota.Text = dgStudents.SelectedCells[18].Value.ToString();
-                else
-                    cbSirota.Text = "";
-
-                if (dgStudents.SelectedCells[19].Value != null)
-                    cbSOP.Text = dgStudents.SelectedCells[19].Value.ToString();
-                else
-                    cbSOP.Text = "";
-
-                if (dgStudents.SelectedCells[20].Value != null)
-                    cbAcadPerfm.Text = dgStudents.SelectedCells[20].Value.ToString();
-                else
-                    cbAcadPerfm.Text = "";
-
-                if (dgStudents.SelectedCells[21].Value != null)
-                    cbActivist.Text = dgStudents.SelectedCells[21].Value.ToString();
-                else
-                    cbActivist.Text = "";
-
-                if (dgStudents.SelectedCells[22].Value != null)
-                    cbHeadClass.Text = dgStudents.SelectedCells[22].Value.ToString();
-                else
-                    cbHeadClass.Text = "";
-
-                if (dgStudents.SelectedCells[23].Value != null)
-                    cbGroupHealth.Text = dgStudents.SelectedCells[23].Value.ToString();
-                else
-                    cbGroupHealth.Text = "";
-
-                tbFrom.Text = dgStudents.SelectedCells[24].Value.ToString();
-                tbWhere.Text = dgStudents.SelectedCells[25].Value.ToString();
-            }
-            catch
-            {
-                MessageBox.Show("Данных нет!", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-
-        }
 
         private void button6_Click(object sender, EventArgs e) // Сброс по кнопке.
         {
@@ -356,7 +280,7 @@ namespace SchoolNumber2
 
         private async void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
         {
-            try
+            if (tb_ID.Text != string.Empty)
             {
                 var wprint = new WordPrint("Doc1.docx");
 
@@ -374,9 +298,13 @@ namespace SchoolNumber2
                 {"<INN>", tbINN.Text },
                 {"<PASPORT>", tbPasport.Text },
                 {"<ADDRESS>", tbAddress.Text },
+                {"<ADDRESSLIVE>", tbAdressLive.Text },
                 {"<FROM>", tbFrom.Text },
                 {"<PPHONE>", tbPPhone.Text },
                 {"<PMAIL>", tbPEmail.Text },
+                {"<OVZ>", cbOVZ.Text },
+                {"<OVZGROUP>", cbOVZGroup.Text },
+                {"<INVALID>", cbInvalid.Text },
                 {"<SOP>", cbSOP.Text },
                 {"<ACADEMICPERFOMANCE>", cbAcadPerfm.Text },
                 {"<ACTIVIST>", cbActivist.Text },
@@ -385,15 +313,9 @@ namespace SchoolNumber2
                 {"<SIROTA>", cbSirota.Text }
                 };
 
-                await Task.Run(() => wprint.Process(items));
-                 //wprint.Process(items);
-
+                await Task.Run(() => wprint.Process(items)); // Пробуем асинхронный метод выполнения для избежания фризов во время выполнения.
+                //wprint.Process(items);   
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
 
         }
 
@@ -404,14 +326,22 @@ namespace SchoolNumber2
 
         private void button1_Click_1(object sender, EventArgs e) // Кнопка вызова панели для переноса учеников в архив.
         {
+            MessageBox.Show("Внимание будьте внимательны! При переносе \n" +
+                            "одного ученика переносится выбранный ученик \n" +
+                            "в таблице. При переносе всех, переносятся все \n" +
+                            "отображенные ученики. Можно выполнить сортировку \n" +
+                            "через поиск для создания нужной категории.", "Внимание!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             panel1.Visible = true;
             panel1.BringToFront();
         }
 
         private void button9_Click_1(object sender, EventArgs e) // Отобразить архив.
         {
-            Form4 form4 = new Form4();
-            form4.Show();
+            if (!Application.OpenForms.OfType<Form4>().Any()) // Проверяем не открыта ли уже такая форма, если да, то игнорируем.
+            {
+                Form4 form4 = new Form4();
+                form4.Show();
+            }           
         }
 
         private void button10_Click(object sender, EventArgs e) // Переводим всех на год вперед. 11 и 9 Класс уходит в архив.
@@ -420,13 +350,13 @@ namespace SchoolNumber2
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Exclamation) == DialogResult.Yes)
             {
-                using (var db = new SchoolDB_Context())
+                using (var db = new SchoolDB_Context()) // Выбираем всех учеников учащихся в 9 и 11 классах.
                 {
                     var nextyear = from n in db.Students
                                    where n.Class.Contains("11") || n.Class.Contains("9")
                                    select n;
 
-                    foreach (var item in nextyear)
+                    foreach (var item in nextyear) // Проходимя по каждому из найденных, удаляем его из основной базы и переносим его в архивную базу.
                     {
                         var archtsudent = new ArchiveOfStudent
                         {
@@ -462,17 +392,17 @@ namespace SchoolNumber2
                         db.SaveChanges();
                     }
 
-                    var _nextyear = from s in db.Students
+                    var _nextyear = from s in db.Students // На этом этапе учеников 9 и 11 классов в базе нет. Проходимся по каждому и увеличиваем значение класса +1.
                                     select s;
 
                     foreach (var item in _nextyear)
                     {
-                        string stringCountClassResult = Regex.Replace(item.Class, @"[^А-Я]+", string.Empty);
+                        string stringCountClassResult = Regex.Replace(item.Class, @"[^А-Я]+", string.Empty); // С помощью Regex отделяем букву класса от основной записи.
                         string countClass = item.Class;
 
                         string intCountClassResult = string.Empty;
                         int val = 0;
-                        for (int i = 0; i < countClass.Length; i++)
+                        for (int i = 0; i < countClass.Length; i++) // Здесь отдельно парсим цифру из значения класс для инкремента(увеличения на 1).
                         {
                             if (Char.IsDigit(countClass[i]))
                             {
@@ -486,9 +416,9 @@ namespace SchoolNumber2
                         val++;
 
                         item.Class = (val + stringCountClassResult).ToString();
-                        db.SaveChanges();
-                        dgStudents.DataSource = db.Students.ToList();
+                        db.SaveChanges();                        
                     }
+                    dgStudents.DataSource = db.Students.ToList();
                 }
             }
         }
@@ -499,7 +429,6 @@ namespace SchoolNumber2
             {
                 dateTimePicker4.Visible = true;
                 button11.Visible = true;
-
             }
             else
             {
@@ -573,8 +502,6 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                for (int i = 0; i < dgStudents.SelectedRows.Count; i++)
-                {
 
                     var key = Convert.ToInt32(dgStudents.SelectedCells[0].Value);  //dgStudents[0,i].Value
 
@@ -613,8 +540,6 @@ namespace SchoolNumber2
                     db.Students.Remove(item);
                     db.ArchiveOfStudents.Add(ArchStudetn);
                     db.SaveChanges();
-
-                }
                 dgStudents.DataSource = db.Students.ToList();
             }
         }
@@ -631,7 +556,7 @@ namespace SchoolNumber2
             toolTip.SetToolTip(checkBox3, "Будет осуществлен перенос одного \n выбранного ученика в архив.");
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e) // Определяем метод переноса учеников. По одному выбранному или всех.
         {
             if (checkBox1.Checked == true && checkBox3.Checked == true)
             {
@@ -667,7 +592,7 @@ namespace SchoolNumber2
             }
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button13_Click(object sender, EventArgs e) // Попытка вынести форму на передний план. Форму с доп кнопками. Не работает. Нужно менять в дизайнере где-то.
         {
             panel1.Visible = false;
             panel1.BringToFront();
@@ -695,22 +620,20 @@ namespace SchoolNumber2
             toolTip.SetToolTip(tbAge, "Возраст расчитывается автоматически!");
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void button14_Click(object sender, EventArgs e) // Кнопка отображения формы ученики и классы.
         {
             ShowClassForm form = new ShowClassForm();
             form.Show();
             Hide();
         }
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
         private void button16_Click(object sender, EventArgs e) // Кнопка отображения итоговых оценок.
         {
-            FinalGradeForm gradeForm = new FinalGradeForm(this);
-            gradeForm.Show();
+            if (!Application.OpenForms.OfType<FinalGradeForm>().Any()) // Проверяем не открыта ли уже такая форма, если да, то игнорируем.
+            {
+                FinalGradeForm gradeForm = new FinalGradeForm(this);
+                gradeForm.Show();
+            }            
         }
 
         private void button17_Click(object sender, EventArgs e)

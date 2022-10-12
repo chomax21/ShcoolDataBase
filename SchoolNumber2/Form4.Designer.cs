@@ -286,7 +286,7 @@ namespace SchoolNumber2
             this.panel1.Controls.Add(this.button7);
             this.panel1.Location = new System.Drawing.Point(974, 298);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(180, 170);
+            this.panel1.Size = new System.Drawing.Size(180, 173);
             this.panel1.TabIndex = 21;
             this.panel1.Visible = false;
             // 
@@ -294,7 +294,7 @@ namespace SchoolNumber2
             // 
             this.dateTimePicker1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker1.Location = new System.Drawing.Point(3, 105);
+            this.dateTimePicker1.Location = new System.Drawing.Point(3, 108);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(174, 23);
             this.dateTimePicker1.TabIndex = 6;
@@ -303,7 +303,7 @@ namespace SchoolNumber2
             // 
             this.button8.Location = new System.Drawing.Point(2, 134);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(175, 32);
+            this.button8.Size = new System.Drawing.Size(175, 33);
             this.button8.TabIndex = 5;
             this.button8.Text = "Восстановить";
             this.button8.UseVisualStyleBackColor = true;

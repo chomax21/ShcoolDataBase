@@ -203,12 +203,11 @@ namespace SchoolNumber2
                 dgArchStudents.DataSource = db.ArchiveOfStudents.ToList();
             }
         }
-        private void SelectArchStudentGoToDataBase()
+        private void SelectArchStudentGoToDataBase() // Метод для переноса на основу ОДНОГО отображенных учеников.
         {
             using (var db = new SchoolDB_Context())
             {
-                for (int i = 0; i < dgArchStudents.SelectedRows.Count; i++)
-                {
+
                     var key = Convert.ToInt32(dgArchStudents.SelectedCells[0].Value);
                     var item = db.ArchiveOfStudents.Find(key);
 
@@ -244,7 +243,7 @@ namespace SchoolNumber2
                     db.ArchiveOfStudents.Remove(item);
                     db.Students.Add(student);
                     db.SaveChanges();
-                }
+                
                 dgArchStudents.DataSource = db.ArchiveOfStudents.ToList();
                 Show();
             }
@@ -262,7 +261,7 @@ namespace SchoolNumber2
             }
             if (checkBox1.Checked == true && checkBox2.Checked == false)
             {
-                if (tbNumberOfOrderArch.Text != "")
+                if (tbNumberOfOrderArch.Text != string.Empty)
                 {
                     SelectArchStudentGoToDataBase();
                 }
@@ -274,7 +273,7 @@ namespace SchoolNumber2
             }
             if (checkBox1.Checked == false && checkBox2.Checked == true)
             {
-                if (tbNumberOfOrderArch.Text != "")
+                if (tbNumberOfOrderArch.Text != string.Empty)
                 {
                     AllGoBackToDataBase();
                 }

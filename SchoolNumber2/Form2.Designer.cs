@@ -164,7 +164,7 @@ namespace SchoolNumber2
             this.button4.Location = new System.Drawing.Point(121, 556);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(75, 31);
-            this.button4.TabIndex = 4;
+            this.button4.TabIndex = 100;
             this.button4.Text = "Назад";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -297,7 +297,6 @@ namespace SchoolNumber2
             this.tb_ID.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.tb_ID.Location = new System.Drawing.Point(41, 434);
             this.tb_ID.Name = "tb_ID";
-            this.tb_ID.ReadOnly = true;
             this.tb_ID.Size = new System.Drawing.Size(69, 23);
             this.tb_ID.TabIndex = 19;
             // 
@@ -376,7 +375,7 @@ namespace SchoolNumber2
             // tbWhere
             // 
             this.tbWhere.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.tbWhere.Location = new System.Drawing.Point(3, 150);
+            this.tbWhere.Location = new System.Drawing.Point(3, 154);
             this.tbWhere.Name = "tbWhere";
             this.tbWhere.Size = new System.Drawing.Size(158, 23);
             this.tbWhere.TabIndex = 17;
@@ -411,7 +410,7 @@ namespace SchoolNumber2
             // 
             this.label12.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(48, 132);
+            this.label12.Location = new System.Drawing.Point(48, 136);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(64, 15);
             this.label12.TabIndex = 33;
@@ -577,7 +576,7 @@ namespace SchoolNumber2
             // 
             this.checkBox2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(963, 394);
+            this.checkBox2.Location = new System.Drawing.Point(960, 394);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(77, 19);
             this.checkBox2.TabIndex = 61;
@@ -590,7 +589,7 @@ namespace SchoolNumber2
             // 
             this.dateTimePicker4.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.dateTimePicker4.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker4.Location = new System.Drawing.Point(1036, 394);
+            this.dateTimePicker4.Location = new System.Drawing.Point(1033, 394);
             this.dateTimePicker4.Name = "dateTimePicker4";
             this.dateTimePicker4.Size = new System.Drawing.Size(126, 23);
             this.dateTimePicker4.TabIndex = 62;
@@ -599,7 +598,7 @@ namespace SchoolNumber2
             // button11
             // 
             this.button11.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.button11.Location = new System.Drawing.Point(1168, 394);
+            this.button11.Location = new System.Drawing.Point(1165, 394);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(83, 23);
             this.button11.TabIndex = 63;
@@ -612,7 +611,7 @@ namespace SchoolNumber2
             // 
             this.checkBox1.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(86, 29);
+            this.checkBox1.Location = new System.Drawing.Point(80, 32);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(51, 19);
             this.checkBox1.TabIndex = 64;
@@ -624,7 +623,7 @@ namespace SchoolNumber2
             // 
             this.checkBox3.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.checkBox3.AutoSize = true;
-            this.checkBox3.Location = new System.Drawing.Point(12, 29);
+            this.checkBox3.Location = new System.Drawing.Point(6, 32);
             this.checkBox3.Name = "checkBox3";
             this.checkBox3.Size = new System.Drawing.Size(67, 19);
             this.checkBox3.TabIndex = 65;
@@ -841,7 +840,7 @@ namespace SchoolNumber2
             this.dgStudents.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgStudents.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllHeaders;
             this.dgStudents.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgStudents.Location = new System.Drawing.Point(-1, 5);
+            this.dgStudents.Location = new System.Drawing.Point(-5, 5);
             this.dgStudents.Name = "dgStudents";
             this.dgStudents.ReadOnly = true;
             this.dgStudents.RowTemplate.Height = 25;
@@ -863,9 +862,9 @@ namespace SchoolNumber2
             this.panel1.Controls.Add(this.checkBox3);
             this.panel1.Controls.Add(this.tbWhere);
             this.panel1.Controls.Add(this.label12);
-            this.panel1.Location = new System.Drawing.Point(1178, 168);
+            this.panel1.Location = new System.Drawing.Point(1165, 145);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(164, 210);
+            this.panel1.Size = new System.Drawing.Size(164, 232);
             this.panel1.TabIndex = 83;
             this.panel1.Visible = false;
             // 
@@ -873,7 +872,7 @@ namespace SchoolNumber2
             // 
             this.dateTimePicker5.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.dateTimePicker5.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTimePicker5.Location = new System.Drawing.Point(3, 98);
+            this.dateTimePicker5.Location = new System.Drawing.Point(3, 101);
             this.dateTimePicker5.Name = "dateTimePicker5";
             this.dateTimePicker5.Size = new System.Drawing.Size(158, 23);
             this.dateTimePicker5.TabIndex = 68;
@@ -900,9 +899,9 @@ namespace SchoolNumber2
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(3, 182);
+            this.button12.Location = new System.Drawing.Point(3, 184);
             this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(158, 28);
+            this.button12.Size = new System.Drawing.Size(158, 38);
             this.button12.TabIndex = 1;
             this.button12.Text = "Выполнить перевод";
             this.button12.UseVisualStyleBackColor = true;
@@ -990,15 +989,15 @@ namespace SchoolNumber2
             // 
             // panel2
             // 
+            this.panel2.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panel2.Controls.Add(this.button300);
             this.panel2.Controls.Add(this.button10);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(995, 269);
+            this.panel2.Location = new System.Drawing.Point(992, 258);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(167, 109);
+            this.panel2.Size = new System.Drawing.Size(167, 119);
             this.panel2.TabIndex = 91;
             this.panel2.Visible = false;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
             // button300
             // 
@@ -1037,6 +1036,7 @@ namespace SchoolNumber2
             this.Controls.Add(this.cbHeadClass);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.label28);
+            this.Controls.Add(this.dgStudents);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cbInvalid);

@@ -130,7 +130,6 @@ namespace SchoolNumber2
                 tbRate.Text = dgTeachers.SelectedCells[17].Value.ToString();
                 tbTSpecialization.Text = dgTeachers.SelectedCells[18].Value.ToString();                                
 
-
                 if (dgTeachers.SelectedCells[19].Value != null)
                     cbSpecItem.Text = dgTeachers.SelectedCells[19].Value.ToString();
                 else
@@ -316,13 +315,42 @@ namespace SchoolNumber2
         }
         public void ResetTeachersFields() // Сбрасываем значения полей.
         {
-            tbDopSpecItemHours.Text = ""; tbDPUHours.Text = ""; tbExpirience.Text = ""; tbDPU.Text = "";
-            tbExpirienceTeach.Text = ""; tbGPDHours.Text = ""; tbSpecItemHours.Text = ""; tbTAdress.Text = ""; tbTAge.Text = "";
-            tbTBaseCl.Text = ""; tbTEmail.Text = ""; tbTINN.Text = ""; tbTMName.Text = ""; tbTName.Text = ""; tbTPassport.Text = "";
-            tbTPhone.Text = ""; tbTPhone.Text = ""; tbTSName.Text = ""; tbTSNILS.Text = ""; tbTSpecialization.Text = "";
-            tbT_ID.Text = ""; cbCategory.Text = ""; cbDopSpecItem.Text = ""; cbSpecItem.Text = ""; dateTimePicker2.Text = "";
-            tbPFD.Text = ""; tbPFDHours.Text = ""; tbKPK.Text = ""; tbRate.Text = ""; tbCoefficient.Text = ""; tbAdressLive.Text = "";
-            cbHonorEmp.Text = ""; cbYangEmp.Text = ""; cbPrimaryOrSec.Text = "";
+            tbDopSpecItemHours.Text = string.Empty;
+            tbDPUHours.Text = string.Empty;
+            tbExpirience.Text = string.Empty;
+            tbDPU.Text = string.Empty;
+            tbExpirienceTeach.Text = string.Empty;
+            tbGPDHours.Text = string.Empty;
+            tbSpecItemHours.Text = string.Empty;
+            tbTAdress.Text = string.Empty;
+            tbTAge.Text = string.Empty;
+            tbTBaseCl.Text = string.Empty;
+            tbTEmail.Text = string.Empty;
+            tbTINN.Text = string.Empty;
+            tbTMName.Text = string.Empty;
+            tbTName.Text = string.Empty;
+            tbTPassport.Text = string.Empty;
+            tbTPhone.Text = string.Empty;
+            tbTPhone.Text = string.Empty;
+            tbTSName.Text = string.Empty;
+            tbTSNILS.Text = string.Empty;
+            tbTSpecialization.Text = string.Empty;
+            tbT_ID.Text = string.Empty;
+            cbCategory.Text = string.Empty;
+            cbDopSpecItem.Text = string.Empty;
+            cbSpecItem.Text = string.Empty;
+            dateTimePicker2.Text = string.Empty;
+            tbPFD.Text = string.Empty;
+            tbPFDHours.Text = string.Empty;
+            tbKPK.Text = string.Empty;
+            tbRate.Text = string.Empty;
+            tbCoefficient.Text = string.Empty;
+            tbAdressLive.Text = string.Empty;
+            cbHonorEmp.Text = string.Empty;
+            cbYangEmp.Text = string.Empty;
+            cbPrimaryOrSec.Text = string.Empty;
+            tbEducation.Text = string.Empty;
+            tbEducationSpec.Text = string.Empty;
         }
 
         private void button6_Click(object sender, EventArgs e) // Кнопка вызываюшая метод сброса полей.
@@ -351,7 +379,7 @@ namespace SchoolNumber2
 
         private async void button8_Click(object sender, EventArgs e)
         {
-            try
+            if (tbT_ID.Text != string.Empty)
             {
                 var wprint = new WordPrint("DocTeachers.docx");
 
@@ -392,15 +420,10 @@ namespace SchoolNumber2
                 {"<BASECLASS>", tbTBaseCl.Text }
                 };
                 await Task.Run(() => wprint.Process(items));
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-           
+            }                          
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e) // Поиск и сортировка.
         {
             using (var db = new SchoolDB_Context())
             {
@@ -420,27 +443,29 @@ namespace SchoolNumber2
                              where s.HonorEmploy.Contains(cbHonorEmp.Text)
                              where s.YangSpicialist.Contains(cbYangEmp.Text)
                              where s.PrimaryOrSecondary.Contains(cbPrimaryOrSec.Text)
-
+                             orderby s.TMiddleName
                              select s;
                 dgTeachers.DataSource = search.ToList();
             }
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e) // Кнопка для вывода формы курсов сотрудников.
         {
-            if (tbT_ID.Text != string.Empty)
+            if (!Application.OpenForms.OfType<TeacherCoursForm>().Any())
             {
-                TeacherCoursForm coursForm = new TeacherCoursForm(this);
-                coursForm.Show();
-            }
-            else
-            {
-                MessageBox.Show("Нужно выбрать сотрудника!", "Внимани!");
-            }
-            
+                if (tbT_ID.Text != string.Empty)
+                {
+                    TeacherCoursForm coursForm = new TeacherCoursForm(this);
+                    coursForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать сотрудника!", "Внимани!");
+                }
+            }                       
         }
 
-        private void Form3_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form3_FormClosed(object sender, FormClosedEventArgs e) // Закрываем форму сотрудников. Возвращаемся к основной форме.
         {
             Form1 form1 = new Form1();
             form1.Show();

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SchoolNumber2
+﻿namespace SchoolNumber2
 {
     class LoginPass
     {

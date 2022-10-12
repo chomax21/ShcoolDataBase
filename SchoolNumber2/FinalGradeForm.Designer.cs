@@ -983,7 +983,6 @@ namespace SchoolNumber2
             this.cbClass.Size = new System.Drawing.Size(101, 23);
             this.cbClass.TabIndex = 93;
             this.cbClass.SelectedIndexChanged += new System.EventHandler(this.cbClass_SelectedIndexChanged);
-            this.cbClass.SelectionChangeCommitted += new System.EventHandler(this.cbClass_SelectionChangeCommitted);
             // 
             // button4
             // 

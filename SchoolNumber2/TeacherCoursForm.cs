@@ -8,28 +8,45 @@ namespace SchoolNumber2
         
     {
         private int TeacherId { get; set; }
-        bool succes = false;
+
+        bool succes = false; // флаг для определения, пришел ли ID на эту форму с пришедшей формы.
+
         public TeacherCoursForm(Form3 form3)
         {
             InitializeComponent();
-            if (form3.tbT_ID.Text != string.Empty)
+            if (form3.tbT_ID.Text != string.Empty) // Здесь приходит ID в виде строки из текстбокса.
             {
-                TeacherId = Convert.ToInt32(form3.tbT_ID.Text);
-                succes = true;
+                TeacherId = Convert.ToInt32(form3.tbT_ID.Text);               
                 tb_IDTeachCours.Text = TeacherId.ToString();
+                succes = true;
             }
             
         }
 
+        public TeacherCoursForm(ShowListDeadCoursForm form)
+        {
+            InitializeComponent(); // Здесь уже приходит ID в виде целого числа(int), поэтому если что-то не так будет отображаться нулевой ID. Дефолтный для int.
+            TeacherId = form.searchID;
+            tb_IDTeachCours.Text = TeacherId.ToString();
+            if (tb_IDTeachCours.Text!=null)
+            {
+                succes = true; // Это здесь излишне, но для работы нужно.
+            }            
+        }
+
+        private void EmptyTextboxs()
+        {
+            tb_IDTeachCours.Text = string.Empty;
+            tb_NameTeachCours.Text = string.Empty;
+        }
+
         private void TeacherCoursForm_Load(object sender, EventArgs e) // Отображем в датагриде списко курсов конкретного сотрудника по его ID, который пришел в конструктор этой формы из формы (БД сотрудников). 
         {
-            if (succes)
+            if (succes) // Если флаг (правда) выполняем дальнейшие действи, отображаем курсы сотрудников...
             {
                 ShowTeacherCours();
                 ChangeColomnNames();
-            }
-            
-           
+            }                       
         }
 
         private void button4_Click(object sender, EventArgs e) // Создаем новую запись о курсах для конкрутного сотрудника.
@@ -46,11 +63,14 @@ namespace SchoolNumber2
                     NameCours = tb_NameTeachCours.Text,
                     CoursDate = dateTimeTeachCours.Text,
                     DeadLineCours = dateTimeDeadLineCours.Text,
-                    CoursHowMachYear = resultTime.Days
+                    CoursHowMachYear = resultTime.Days,
+                    marked = false
+                    
                 };
                 db.TeacherRefresherCourses.Add(teacherCours);
                 db.SaveChanges();
                 ShowTeacherCours();
+                EmptyTextboxs();
             }
         }
 
@@ -69,11 +89,12 @@ namespace SchoolNumber2
                     item.CoursDate = dateTimeTeachCours.Text;
                     item.DeadLineCours = dateTimeDeadLineCours.Text;
                     item.CoursHowMachYear = resultTime.Days;
+                    item.marked = cbMark.Text == "Да" ? item.marked = true : item.marked = false;
                     db.SaveChanges();
                 }
-                dgTeacherCours.DataSource = db.TeacherRefresherCourses.ToList();
+                ShowTeacherCours();
             }
-
+            EmptyTextboxs();
         }
 
         private void button3_Click(object sender, EventArgs e) // Удаляем запись курсов.
@@ -94,10 +115,9 @@ namespace SchoolNumber2
                         db.TeacherRefresherCourses.Remove(item);
                         db.SaveChanges();                        
                     }
-                    dgTeacherCours.DataSource = db.TeacherRefresherCourses.ToList();
-
+                    ShowTeacherCours();
                 }
-
+                EmptyTextboxs();
             }
         }
 
@@ -105,7 +125,10 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                dgTeacherCours.DataSource = db.TeacherRefresherCourses.ToList();
+                var findCoursByID = from s in db.TeacherRefresherCourses
+                                    where s.SearchTeacherID == TeacherId
+                                    select s;
+                dgTeacherCours.DataSource = findCoursByID.ToList();
             }
         }
 
@@ -116,10 +139,18 @@ namespace SchoolNumber2
 
         private void dgTeacherCours_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            tb_IDTeachCours.Text = dgTeacherCours.SelectedCells[1].Value.ToString();
-            tb_NameTeachCours.Text = dgTeacherCours.SelectedCells[2].Value.ToString();
-            dateTimeTeachCours.Text = dgTeacherCours.SelectedCells[3].Value.ToString();
-            dateTimeDeadLineCours.Text = dgTeacherCours.SelectedCells[4].Value.ToString();
+            
+            if (dgTeacherCours != null)
+            {
+                tb_IDTeachCours.Text = dgTeacherCours.SelectedCells[1].Value.ToString();
+                tb_NameTeachCours.Text = dgTeacherCours.SelectedCells[2].Value.ToString();
+                dateTimeTeachCours.Text = dgTeacherCours.SelectedCells[3].Value.ToString();
+                dateTimeDeadLineCours.Text = dgTeacherCours.SelectedCells[4].Value.ToString();
+                bool check = (bool)dgTeacherCours.SelectedCells[6].Value;
+                if (check) cbMark.SelectedIndex = 0;
+                else cbMark.SelectedIndex = 1;
+            }
+            
         }
         private void ChangeColomnNames()
         {
@@ -140,7 +171,7 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                dgTeacherCours.DataSource = db.TeacherRefresherCourses.ToList();
+                ShowTeacherCours();
             }
         }
     }
