@@ -443,6 +443,7 @@ namespace SchoolNumber2
                              where s.HonorEmploy.Contains(cbHonorEmp.Text)
                              where s.YangSpicialist.Contains(cbYangEmp.Text)
                              where s.PrimaryOrSecondary.Contains(cbPrimaryOrSec.Text)
+                             orderby s.TMiddleName
                              select s;
                 dgTeachers.DataSource = search.ToList();
             }
@@ -450,16 +451,18 @@ namespace SchoolNumber2
 
         private void button10_Click(object sender, EventArgs e) // Кнопка для вывода формы курсов сотрудников.
         {
-            if (tbT_ID.Text != string.Empty)
+            if (!Application.OpenForms.OfType<TeacherCoursForm>().Any())
             {
-                TeacherCoursForm coursForm = new TeacherCoursForm(this);
-                coursForm.Show();
-            }
-            else
-            {
-                MessageBox.Show("Нужно выбрать сотрудника!", "Внимани!");
-            }
-            
+                if (tbT_ID.Text != string.Empty)
+                {
+                    TeacherCoursForm coursForm = new TeacherCoursForm(this);
+                    coursForm.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Нужно выбрать сотрудника!", "Внимани!");
+                }
+            }                       
         }
 
         private void Form3_FormClosed(object sender, FormClosedEventArgs e) // Закрываем форму сотрудников. Возвращаемся к основной форме.
