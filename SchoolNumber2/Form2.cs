@@ -194,17 +194,20 @@ namespace SchoolNumber2
             {
                 using (var db = new SchoolDB_Context())
                 {
-                    int key = Convert.ToInt32(tb_ID.Text);
-                    var item = db.Students.Find(key);
-                    if (item != null)
+                    if (tb_ID.Text != string.Empty)
                     {
-                        db.Students.Remove(item);
-                        db.SaveChanges();
-                        dgStudents.DataSource = db.Students.ToList();
-                    }
+                        int key = Convert.ToInt32(tb_ID.Text);
+
+                        var item = db.Students.Find(key);
+                        if (item != null)
+                        {
+                            db.Students.Remove(item);
+                            db.SaveChanges();
+                            dgStudents.DataSource = db.Students.ToList();
+                        }
+                    }                   
                 }
             }
-
             GetCountStudentsInDataBase();
             ResetField();
         }
