@@ -377,7 +377,7 @@ namespace SchoolNumber2
 
         }
 
-        private async void button8_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e)
         {
             if (tbT_ID.Text != string.Empty)
             {
@@ -419,7 +419,7 @@ namespace SchoolNumber2
                 {"<PRIMARYORSECONDAY>", cbPrimaryOrSec.Text },
                 {"<BASECLASS>", tbTBaseCl.Text }
                 };
-                await Task.Run(() => wprint.Process(items));
+                wprint.Process(items, saveFileDialog1);
             }                          
         }
 

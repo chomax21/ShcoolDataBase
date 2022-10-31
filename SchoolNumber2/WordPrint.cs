@@ -24,47 +24,58 @@ namespace SchoolNumber2
             }
         }
 
-        internal bool Process(Dictionary<string, string> items)
-        {          
-            Word.Application app = null;
+        internal bool Process(Dictionary<string, string> items, SaveFileDialog saveFile)
+        {
+            Word.Application app = null;           
+            
             try
             {
-                app = new Word.Application();
-                Object file = _fileinfo.FullName;
+                saveFile.InitialDirectory = "C";
+                saveFile.Title = "SAVE AS WORD FILE";
+                saveFile.FileName = DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + "";
+                saveFile.Filter = "Word Documents (*.docx)|*.docx";
 
-                Object missing = Type.Missing;
 
-                app.Documents.Open(file);
-
-                foreach (var item in items)
+                if (saveFile.ShowDialog() != DialogResult.Cancel)
                 {
-                    Word.Find find = app.Selection.Find;
-                    find.Text = item.Key;
-                    find.Replacement.Text = item.Value;
+                    app = new Word.Application();
+                    Object file = _fileinfo.FullName;
 
-                    Object wrap = Word.WdFindWrap.wdFindContinue;
-                    Object replace = Word.WdReplace.wdReplaceAll;
+                    Object missing = Type.Missing;
 
-                    find.Execute(FindText: Type.Missing,
-                        MatchCase: false,
-                        MatchWholeWord: false,
-                        MatchWildcards: false,
-                        MatchSoundsLike: missing,
-                        MatchAllWordForms: false,
-                        Forward: true,
-                        Wrap: wrap,
-                        Format: false,
-                        ReplaceWith: missing, Replace: replace);
+                    app.Documents.Open(file);
+
+                    foreach (var item in items)
+                    {
+                        Word.Find find = app.Selection.Find;
+                        find.Text = item.Key;
+                        find.Replacement.Text = item.Value;
+
+                        Object wrap = Word.WdFindWrap.wdFindContinue;
+                        Object replace = Word.WdReplace.wdReplaceAll;
+
+                        find.Execute(FindText: Type.Missing,
+                            MatchCase: false,
+                            MatchWholeWord: false,
+                            MatchWildcards: false,
+                            MatchSoundsLike: missing,
+                            MatchAllWordForms: false,
+                            Forward: true,
+                            Wrap: wrap,
+                            Format: false,
+                            ReplaceWith: missing, Replace: replace);
+                    }
+
+                    var newPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+
+                    Object newFileName = Path.Combine(newPath, DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + _fileinfo.Name);
+                    app.ActiveDocument.SaveAs2(saveFile.FileName);
+                    app.ActiveDocument.Close();
+                    MessageBox.Show("Успешно! Файл сохранен", "Выполнение");
+
+                    return true;
                 }
-
-                var newPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-                Object newFileName = Path.Combine(newPath, DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + _fileinfo.Name);
-                app.ActiveDocument.SaveAs2(newFileName);
-                app.ActiveDocument.Close();
-                MessageBox.Show("Успешно! Файл сохранен на рабочем столе", "Выполнение");
-
-                return true;
+               
             }
             catch (Exception ex)
             {
@@ -73,10 +84,10 @@ namespace SchoolNumber2
             finally
             {
                 if (app != null)
-                {
-                  app.Quit();
+                {                    
+                    app.Quit();
+                    saveFile.Dispose();                  
                 }
-
             }    
             return false;
         }

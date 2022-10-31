@@ -95,6 +95,7 @@ namespace SchoolNumber2
             this.button3 = new System.Windows.Forms.Button();
             this.label37 = new System.Windows.Forms.Label();
             this.lb_ID = new System.Windows.Forms.Label();
+            this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.SuspendLayout();
             // 
             // lbClass
@@ -834,5 +835,6 @@ namespace SchoolNumber2
         private System.Windows.Forms.Button button3;
         public System.Windows.Forms.Label label37;
         public System.Windows.Forms.Label lb_ID;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog1;
     }
 }

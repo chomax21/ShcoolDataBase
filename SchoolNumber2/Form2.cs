@@ -111,49 +111,58 @@ namespace SchoolNumber2
 
         private void button1_Click(object sender, EventArgs e)   // Кнопка добавления учеников в БД.
         {
-            using (var db = new SchoolDB_Context())
+            try
             {
-                DateTime time1 = dateTimePicker1.Value; // Происходит вычисление возраста на текущий момент.
-                DateTime time2 = DateTime.Now;
-                int timeResult = (time2 - time1).Days;
-                int timeResult2 = timeResult / 365;
-
-                var student1 = new Student()
+                using (var db = new SchoolDB_Context())
                 {
-                    FirstName = tbName.Text,
-                    SurName = tbSName.Text,
-                    MiddleName = tbMName.Text,
-                    Sex = cbSex.Text,
-                    DOB = dateTimePicker1.Text,
-                    Age = timeResult2.ToString(),
-                    OVZ = cbOVZ.Text,
-                    OVZGroup = cbOVZGroup.Text,
-                    AcademicPerfomance = cbAcadPerfm.Text,
-                    Activist = cbActivist.Text,
-                    HealthCategory = cbGroupHealth.Text,
-                    AddresLive = tbAdressLive.Text,
-                    Sirota = cbSirota.Text,
-                    Invalid = cbInvalid.Text,
-                    SOP = cbSOP.Text,
-                    Class = tbClass.Text,
-                    SNILS = tbSNILS.Text,
-                    INN = tbINN.Text,
-                    Pasport = tbPasport.Text,
-                    Address = tbAddress.Text,
-                    From = tbFrom.Text + " | " + dateTimePicker2.Text,
-                    Where = tbWhere.Text,
-                    PPhone = tbPPhone.Text,
-                    PMail = tbPEmail.Text
+                    DateTime time1 = dateTimePicker1.Value; // Происходит вычисление возраста на текущий момент.
+                    DateTime time2 = DateTime.Now;
+                    int timeResult = (time2 - time1).Days;
+                    int timeResult2 = timeResult / 365;
 
-                };
+                    var student1 = new Student()
+                    {
+                        FirstName = tbName.Text,
+                        SurName = tbSName.Text,
+                        MiddleName = tbMName.Text,
+                        Sex = cbSex.Text,
+                        DOB = dateTimePicker1.Text,
+                        Age = timeResult2.ToString(),
+                        OVZ = cbOVZ.Text,
+                        OVZGroup = cbOVZGroup.Text,
+                        AcademicPerfomance = cbAcadPerfm.Text,
+                        Activist = cbActivist.Text,
+                        HealthCategory = cbGroupHealth.Text,
+                        AddresLive = tbAdressLive.Text,
+                        Sirota = cbSirota.Text,
+                        Invalid = cbInvalid.Text,
+                        SOP = cbSOP.Text,
+                        Class = tbClass.Text,
+                        SNILS = tbSNILS.Text,
+                        INN = tbINN.Text,
+                        Pasport = tbPasport.Text,
+                        Address = tbAddress.Text,
+                        From = tbFrom.Text + " | " + dateTimePicker2.Text,
+                        Where = tbWhere.Text,
+                        PPhone = tbPPhone.Text,
+                        PMail = tbPEmail.Text
 
-                db.Students.Add(student1);
-                db.SaveChanges();
-                dgStudents.DataSource = db.Students.ToList();
-                ChangeColomnNames();
-                GetCountStudentsInDataBase();
-                ResetField();
+                    };
+
+                    db.Students.Add(student1);
+                    db.SaveChanges();
+                    dgStudents.DataSource = db.Students.ToList();
+                    ChangeColomnNames();
+                    GetCountStudentsInDataBase();
+                    ResetField();
+                }
+
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка!!!", ex.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            
         }
         private void button2_Click(object sender, EventArgs e)  // Поиск и сортировка
         {
@@ -210,6 +219,7 @@ namespace SchoolNumber2
             }
             GetCountStudentsInDataBase();
             ResetField();
+            this.Activate();
         }
 
 
@@ -257,6 +267,14 @@ namespace SchoolNumber2
                     item.PMail = tbPEmail.Text;
                     item.Activist = cbActivist.Text;
                     item.HeadOfTheClass = cbHeadClass.Text;
+                    if (item.HeadOfTheClass == "Да")
+                    {
+                        var headCLass = db.Students.FirstOrDefault(x => x.HeadOfTheClass == "Да" && x.Class == item.Class);
+                        if(headCLass != null)
+                        {
+                            headCLass.HeadOfTheClass = "-";
+                        }
+                    }
                     db.SaveChanges();
                     dgStudents.DataSource = db.Students.ToList();
                 }
@@ -281,7 +299,7 @@ namespace SchoolNumber2
             ResetField();
         }
 
-        private async void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
+        private void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
         {
             if (tb_ID.Text != string.Empty)
             {
@@ -316,7 +334,7 @@ namespace SchoolNumber2
                 {"<SIROTA>", cbSirota.Text }
                 };
 
-                await Task.Run(() => wprint.Process(items)); // Пробуем асинхронный метод выполнения для избежания фризов во время выполнения.
+                wprint.Process(items, sFiDialogW); // Пробуем асинхронный метод выполнения для избежания фризов во время выполнения.
                 //wprint.Process(items);   
             }
 
@@ -407,18 +425,18 @@ namespace SchoolNumber2
                         int val = 0;
                         for (int i = 0; i < countClass.Length; i++) // Здесь отдельно парсим цифру из значения класс для инкремента(увеличения на 1).
                         {
-                            if (Char.IsDigit(countClass[i]))
+                            if (Char.IsDigit(countClass[i])) // Проходимся по каждому значению в строке, и проверяем является ли этот символ цифрой, если да, то добавляем к записи которую будем потом парсить в число.
                             {
-                                intCountClassResult += countClass[i];
+                                intCountClassResult += countClass[i]; // Добавляем символ если это цифра тут.
                             }
                         }
                         if (intCountClassResult.Length > 0)
                         {
-                            val = int.Parse(intCountClassResult);
+                            val = int.Parse(intCountClassResult); // Тут проходимся по записи, и уже непосредственно парсим.
                         }
                         val++;
 
-                        item.Class = (val + stringCountClassResult).ToString();
+                        item.Class = (val + stringCountClassResult).ToString(); // Соединяем все обратно в единую запись, дабаляем в базу.
                         db.SaveChanges();                        
                     }
                     dgStudents.DataSource = db.Students.ToList();
@@ -747,5 +765,6 @@ namespace SchoolNumber2
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(checkBox2, "Функция позволяющая расчитать возраст учеников под конкретную дату.");
         }
+
     }
 }
