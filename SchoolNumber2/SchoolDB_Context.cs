@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Data.SQLite;
 
 namespace SchoolNumber2
 {

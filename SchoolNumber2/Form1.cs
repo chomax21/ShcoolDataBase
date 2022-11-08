@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -7,7 +6,7 @@ using System.Windows.Forms;
 namespace SchoolNumber2
 {
     public partial class Form1 : Form
-    { 
+    {
         public Form1()
         {
             InitializeComponent();
@@ -45,13 +44,13 @@ namespace SchoolNumber2
                 label2.Text = sizeDbTeachers.ToString();
             }
 
-            await Task.Run(() => SearchDeadListTeacherCours());   
-            await Task.Run(() => StudentAgeCalculating());   
-            await Task.Run(() => TeacherAgeCalculating());   
-                
-                // Сделать вывод ИД курсов для последующего вывода сотрудников чьи курсы просроченны или скоро закончатся.
-                // С помощью Join LINQ
-            
+            await Task.Run(() => SearchDeadListTeacherCours());
+            await Task.Run(() => StudentAgeCalculating()); // При каждом запуске в теории происходит перерасчет возраста учеников на момент старта приложения с дальнейшим сохраненим в бд.   
+            await Task.Run(() => TeacherAgeCalculating()); // То же самое, что и выше только для сотрудников.  
+
+            // Сделать вывод ИД курсов для последующего вывода сотрудников чьи курсы просроченны или скоро закончатся.
+            // С помощью Join LINQ
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -70,7 +69,7 @@ namespace SchoolNumber2
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Environment.Exit(0); 
+            Environment.Exit(0);
             Application.Exit();
         }
 
@@ -94,7 +93,6 @@ namespace SchoolNumber2
                             item.Age = timeResult2.ToString();
                         }
                         db.SaveChanges();
-                        //var result = db.Students.Find(item.StudentsID);
                     }
 
                 }
@@ -122,7 +120,6 @@ namespace SchoolNumber2
                             item.TAge = timeResult2.ToString();
                         }
                         db.SaveChanges();
-                        //var result = db.Students.Find(item.StudentsID);
                     }
 
                 }
@@ -135,7 +132,7 @@ namespace SchoolNumber2
         {
             using (var db = new SchoolDB_Context())
             {
-                var searchDeadLineCours = from s in db.TeacherRefresherCourses 
+                var searchDeadLineCours = from s in db.TeacherRefresherCourses
                                           select s;
                 foreach (var item in searchDeadLineCours)
                 {
