@@ -26,7 +26,7 @@ namespace SchoolNumber2
 
         }
 
-        private async void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace SchoolNumber2
                 {"<SIROTA>", lbSirota.Text }
                 };
 
-                await Task.Run(() => wprint.Process(items));
+                wprint.Process(items,saveFileDialog1);
             }
             catch (Exception ex)
             {

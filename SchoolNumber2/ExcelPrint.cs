@@ -8,11 +8,8 @@ namespace SchoolNumber2
 {
     public class ExcelPrint
     {
-
-
         public static void PrintDataGridToExel(DataGridView data, SaveFileDialog saveFile)
         {
-
             Excelapp.Application excelApp = null;
             Workbooks workbooks = null;
             Workbook workbook = null;
@@ -46,9 +43,6 @@ namespace SchoolNumber2
                     excelApp.ActiveWorkbook.SaveCopyAs(saveFile.FileName.ToString());
                     excelApp.ActiveWorkbook.Saved = true;
                     excelApp.Quit();
-
-                    GC.Collect();
-                    GC.WaitForPendingFinalizers();
                     MessageBox.Show("Успешно!", "Выполнение");
                 }
                 Cursor.Current = Cursors.Default;

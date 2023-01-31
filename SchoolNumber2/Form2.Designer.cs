@@ -1036,7 +1036,6 @@ namespace SchoolNumber2
             this.Controls.Add(this.cbHeadClass);
             this.Controls.Add(this.label29);
             this.Controls.Add(this.label28);
-            this.Controls.Add(this.dgStudents);
             this.Controls.Add(this.label17);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.cbInvalid);

@@ -190,7 +190,7 @@ namespace SchoolNumber2
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Exclamation,
                 MessageBoxDefaultButton.Button2,
-                MessageBoxOptions.DefaultDesktopOnly) == DialogResult.Yes)
+                MessageBoxOptions.DefaultDesktopOnly) == DialogResult.Yes && tb_ID.Text != string.Empty)
             {
                 using (var db = new SchoolDB_Context())
                 {
@@ -204,9 +204,13 @@ namespace SchoolNumber2
                     }
                 }
             }
-
+            else
+            {
+                MessageBox.Show("Вы не выбрали ученика","Ошибка!", MessageBoxButtons.OK);
+            }
             GetCountStudentsInDataBase();
             ResetField();
+            this.Owner = this;
         }
 
 
@@ -278,7 +282,7 @@ namespace SchoolNumber2
             ResetField();
         }
 
-        private async void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
+        private void button8_Click(object sender, EventArgs e)  // Экспорт в WORD.
         {
             if (tb_ID.Text != string.Empty)
             {
@@ -313,7 +317,7 @@ namespace SchoolNumber2
                 {"<SIROTA>", cbSirota.Text }
                 };
 
-                await Task.Run(() => wprint.Process(items)); // Пробуем асинхронный метод выполнения для избежания фризов во время выполнения.
+                wprint.Process(items,sFiDialogW); // Пробуем асинхронный метод выполнения для избежания фризов во время выполнения.
                 //wprint.Process(items);   
             }
 

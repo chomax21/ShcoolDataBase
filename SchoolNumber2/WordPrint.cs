@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Windows.Forms;
 using Word = Microsoft.Office.Interop.Word;
 
@@ -24,47 +23,56 @@ namespace SchoolNumber2
             }
         }
 
-        internal bool Process(Dictionary<string, string> items)
-        {          
+        internal bool Process(Dictionary<string, string> items, SaveFileDialog fileDialog)
+        {
             Word.Application app = null;
             try
             {
-                app = new Word.Application();
-                Object file = _fileinfo.FullName;
+                Cursor.Current = Cursors.WaitCursor;
+                fileDialog.InitialDirectory = "C";
+                fileDialog.FileName = DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + "";
+                fileDialog.Title = "SAVE AS WORD FILE";
+                fileDialog.Filter = "doc files (*.doc)|*.doc|All files (*.*)|*.*";
 
-                Object missing = Type.Missing;
-
-                app.Documents.Open(file);
-
-                foreach (var item in items)
+                if (fileDialog.ShowDialog() != DialogResult.Cancel)
                 {
-                    Word.Find find = app.Selection.Find;
-                    find.Text = item.Key;
-                    find.Replacement.Text = item.Value;
+                    app = new Word.Application();
+                    Object file = _fileinfo.FullName;
 
-                    Object wrap = Word.WdFindWrap.wdFindContinue;
-                    Object replace = Word.WdReplace.wdReplaceAll;
+                    Object missing = Type.Missing;
 
-                    find.Execute(FindText: Type.Missing,
-                        MatchCase: false,
-                        MatchWholeWord: false,
-                        MatchWildcards: false,
-                        MatchSoundsLike: missing,
-                        MatchAllWordForms: false,
-                        Forward: true,
-                        Wrap: wrap,
-                        Format: false,
-                        ReplaceWith: missing, Replace: replace);
+                    app.Documents.Open(file);
+
+                    foreach (var item in items)
+                    {
+                        Word.Find find = app.Selection.Find;
+                        find.Text = item.Key;
+                        find.Replacement.Text = item.Value;
+
+                        Object wrap = Word.WdFindWrap.wdFindContinue;
+                        Object replace = Word.WdReplace.wdReplaceAll;
+
+                        find.Execute(FindText: Type.Missing,
+                            MatchCase: false,
+                            MatchWholeWord: false,
+                            MatchWildcards: false,
+                            MatchSoundsLike: missing,
+                            MatchAllWordForms: false,
+                            Forward: true,
+                            Wrap: wrap,
+                            Format: false,
+                            ReplaceWith: missing, Replace: replace);
+                    }
+
+                    //var newPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+                    //var newFileName = Path.Combine(newPath, DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + _fileinfo.Name);
+                    app.ActiveDocument.SaveAs2(fileDialog.FileName);
+                    app.ActiveDocument.Close();
+                    MessageBox.Show("Успешно! Файл сохранен", "Выполнение");
+                    Cursor.Current = Cursors.Default;
+                    return true;
                 }
-
-                var newPath = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-
-                Object newFileName = Path.Combine(newPath, DateTime.Now.ToString("yyyy/MM/dd HH/mm/ss ") + _fileinfo.Name);
-                app.ActiveDocument.SaveAs2(newFileName);
-                app.ActiveDocument.Close();
-                MessageBox.Show("Успешно! Файл сохранен на рабочем столе", "Выполнение");
-
-                return true;
+                
             }
             catch (Exception ex)
             {
@@ -74,10 +82,10 @@ namespace SchoolNumber2
             {
                 if (app != null)
                 {
-                  app.Quit();
+                    app.Quit();
                 }
-
-            }    
+                fileDialog.Dispose();
+            }
             return false;
         }
     }
